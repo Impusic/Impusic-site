@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root{
+    --header-height: 80px;
+    --header-background: rgba(0, 0, 0, 0.5);
+    --text: rgb(255, 255, 255);
+    --text-hover: rgb(189, 189, 189);
+
+    --text-unavaliable: rgb(80, 80, 80);
+
+    --background-color-1: #000000;
+    --background-color-2: #1d1d1d;
+    --background-color-3: #000000;
+
+    /* video card root */
+    /* bt = black theme
+    wt = white theme */
+    --title-bt: rgb(230, 230, 230);
+    --title-bt-hover: rgb(170, 170, 170);
+    --desc-bt: rgb(169, 169, 169);
+
+    /* COLOR OF LOGO */
+    --color-theme-one: #c320f6;
+    --color-theme-two: #7613e6;
+    --color-theme-three: #9d1dd2;
+
+    --color-a: rgb(9, 142, 213);
+    --color-a-hover: rgb(0, 166, 255);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Roboto', sans-serif;
+    font-display: swap;
+    box-sizing: inherit
+}
+body {
+    background: rgb(31,19,20);
+    background: linear-gradient(146deg, var(--background-color-1) 0%, var(--background-color-2) 100%);
+    width: 100%;
+}
+
+body,
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+    width: 5px;               /* width of the entire scrollbar */
+    height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;        /* color of the tracking area */
+}
+body::-webkit-scrollbar-track {
+    background: black;        /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(73, 73, 73);    /* color of the scroll thumb */
+    border-radius: 2px;       /* roundness of the scroll thumb */
+}
+
+#content{
+    min-height: 100vh;
+}
+  
+
+a{
+    color: var(--color-a);
+    transition: .3s;
+}
+a:hover{
+    color: var(--color-a-hover);
+}
+
+
+/* HEADER */
+header{
+    width: 100vw;
+    height: var(--header-height);
+
+    background-color: transparent;
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: 0 5vw;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    transition: .3s;
+
+    z-index: 9999;
+}
+.sticky{
+    background-color: var(--header-background);
+}
+
+/* header > div > a > img{
+    width: var(--header-height);
+} */
+
+header > div{
+    display: flex;
+    align-items: center;
+}
+header > #itens a,
+header > #itens li{
+    display: inline;
+    text-align: center;
+
+    text-decoration: none;
+    color: var(--text);
+
+    font-weight: 100;
+
+    transition: .3s;
+}
+header > #itens a + a{
+    margin-left: 20px;
+}
+header > #itens a:hover,
+header > #itens li:hover{
+    color: var(--text-hover);
+}
+header > #itens button{
+    background: var(--color-theme-one);
+    background: linear-gradient(225deg, var(--color-theme-one) 0%, var(--color-theme-two) 100%);
+
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: thin solid var(--color-theme-three);
+
+    color: white;
+    cursor: pointer;
+}
+header > #itens .login button{
+    background: -webkit-linear-gradient(var(--color-theme-one), var(--color-theme-two));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+header > #itens a + .buttons{
+    margin-left: 20px;
+}
+header > #itens .buttons + .buttons{
+    margin-left: 5px;
+}
+
+header > #search > div{
+    width: 300px;
+
+    border-radius: 10px;
+    position: relative;
+    display: grid;
+    align-items: center;
+}
+header > #search > div > input{
+    width: 100%;
+    height: 100%;
+
+    background-color: transparent;
+    border: thin solid white;
+    border-radius: 10px;
+    color: var(--text);
+
+
+    padding: 5px 10px;
+
+    font-weight: 200;
+}
+header > #search > div > input::placeholder{
+    color: var(--text-hover);
+}
+header > #search > div > input:focus{
+    outline: none;
+}
+header > #search > div > label{
+    color: var(--text);
+    position: absolute;
+    right: 10px;
+    font-size: 13px;
+    cursor: pointer;
+
+    transition: .3s;
+}
+header > #search > div > label:hover{
+    color: var(--text-hover);
+}
+
+header > #itens > .profile{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+header > #itens > .profile > form > button{
+    all: inherit;
+}
+header > #itens > .profile > form > button > i{
+    color: var(--text);
+    cursor: pointer;
+    transition: .3s;
+}
+header > #itens > .profile > form > button > i:hover{
+    color: var(--text-hover);
+}
+header > #itens > .profile > a > img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+/* FOOTER */
+footer{
+    width: 100%;
+    height: 200px;
+
+    background-color: rgba(0, 0, 0, 0.3);
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    padding: 0 40px;
+
+    color: var(--text);
+}
+footer > div{
+    width: 25%;
+    padding: 20px;
+
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+}
+footer > div > .footer-hr{
+    width: 25%;
+    margin: 2px 0 5px -20px;
+    height: 1px;
+    background-color: var(--text);
+}
+footer > div > h1{
+    font-size: 16px;
+}
+footer > div > a,
+footer > div > p{
+    color: var(--text);
+    display: block;
+    font-size: 12px;
+    font-weight: 100;
+
+    text-decoration: none;
+    transition: .3s;
+}
+footer > div > a:hover{
+    color: var(--text-hover);
+}
+.copy{
+    width: 100%;
+    color: var(--text);
+    text-align: center;
+    font-weight: 100;
+    font-size: 10px;
+    padding: 5px 0;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+
+.status{
+    opacity: 0;
+
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+    font-size: 15px;
+    font-weight: 500;
+    padding: 4px 16px;
+
+    border-radius: 5px;
+
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    z-index: 99999;
+
+    animation: statusShow 4s, statusInvisible 2s 4s 1;
+}
+
+@keyframes statusShow {
+    0%{
+        opacity: 80%;
+        transform: translateY(300%);
+    }
+    20%{
+        opacity: 80%;
+        transform: translateY(0);
+    }
+    100%{
+        opacity: 80%;
+        transform: translateY(0);
+    }
+}
+
+@keyframes statusInvisible {
+    0%{
+        opacity: 80%;
+    }
+    90%{
+        opacity: 0%;
+    }
+    100%{
+        display: none;
+    }
+}

@@ -1,0 +1,241 @@
+:root{
+    --description: rgb(207, 207, 207);
+    --description-hover: rgb(158, 158, 158);
+
+    --link: #0041a3;
+    --link-hover: #00388b;
+
+    --profile-button: #6977F4;
+    --profile-button-hover: #3a4dff;
+
+    --profile-button-edit: #76777d;
+    --profile-button-edit-hover: #515255;
+}
+.hero{
+    width: 100%;
+    height: 35vh;
+
+    background-color: rgba(128, 128, 128, 0.4);
+    position: relative;
+}
+.hero > .social{
+    display: flex;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.hero > .social > a{
+    color: var(--text);
+    transition: .3s;
+}
+.hero > .social > a:hover{
+    color: var(--text-hover);
+}
+.hero > .social > a + a{
+    margin-left: 10px;
+}
+
+.profileInfo{
+    width: 25%;
+
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: calc(35vh - 150px/2);
+    left: calc(50% - 25%/2);
+}
+.profileInfo > img{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+}
+.profileInfo > h1{
+    color: var(--text);
+    font-weight: 900;
+    font-size: 25px;
+
+    margin-top: 10px;
+}
+.profileInfo > p{
+    color: var(--desc-bt);
+    font-weight: 300;
+    font-size: 15px;
+    width: 75%;
+    text-align: center;
+    margin: 5px 0;
+}
+.profileInfo > p > a{
+    color: var(--link);
+    text-decoration: none;
+    transition: .3s;
+}
+.profileInfo > p > a:hover{
+    color: var(--link-hover);
+}
+.profileInfo > .settings{
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+    justify-content: center;
+    justify-items: center;
+}
+.profileInfo > .settings > .more{
+    width: 25px;
+    height: 25px;
+
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    background-color: var(--profile-button);
+    color: white;
+    font-weight: 900;
+    transition: .3s;
+}
+.profileInfo > .settings > .follow{
+    padding: 0 10px;
+    height: 25px;
+
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    background-color: var(--profile-button);
+    color: white;
+    font-weight: 900;
+    transition: .3s;
+}
+.profileInfo > .settings > .follow:hover,
+.profileInfo > .settings > .more:hover{
+    background-color: var(--profile-button-hover);
+}
+
+.profileInfo > .settings > .moreEdit{
+    width: 25px;
+    height: 25px;
+
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    background-color: var(--profile-button-edit);
+    color: white;
+    font-weight: 900;
+    transition: .3s;
+}
+.profileInfo > .settings > a > .edit{
+    padding: 0 10px;
+    height: 25px;
+
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    background-color: var(--profile-button-edit);
+    color: white;
+    font-weight: 900;
+    transition: .3s;
+}
+.profileInfo > .settings > a > .edit:hover,
+.profileInfo > .settings > .moreEdit:hover{
+    background-color: var(--profile-button-edit-hover);
+}
+
+.stats{
+    color: rgba(161, 161, 161, 0.9);
+
+    text-align: center;
+}
+.stats > p{
+    display: inline;
+    font-weight: 300;
+}
+.stats > p > span{
+    font-weight: 800;
+}
+.stats > p + p{
+    margin-left: 20px;
+}
+.hr{
+    width: 75vw;
+    height: 1px;
+    background-color: rgba(128, 128, 128, 0.6);
+    margin: 10px auto;
+}
+.spaceProfile{
+    width: 100%;
+    height: 275px;
+}
+
+.profileVideos{
+    width: 75vw;
+    margin: 0 auto;
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 30px 0;
+}
+.profileVideos > .videoContainer{
+    width: 30%;
+    height: auto;
+}
+.profileVideos > .videoContainer > a > img{
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    cursor: pointer;
+}
+.profileVideos > .videoContainer > .title{
+    all: inherit;
+    width: auto;
+}
+.profileVideos > .videoContainer > a > h1{
+    color: var(--text);
+    font-size: 16px;
+    transition: .3s;
+
+    cursor: pointer;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 5px;
+}
+.profileVideos > .videoContainer > h1:hover{
+    color: var(--text-hover);
+}
+.profileVideos > .videoContainer > h2{
+    padding: 0 5px;
+}
+.profileVideos > .videoContainer > h2,
+.profileVideos > .videoContainer > h2 > a{
+    color: var(--description);
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 300;
+
+    transition: .3s;
+}
+.profileVideos > .videoContainer > h2 > a:hover{
+    color: var(--description-hover);
+}
+.profileVideos > .videoContainer > h3{
+    color: var(--description);
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 500;
+
+    padding: 0 5px;
+    transition: .3s;
+}

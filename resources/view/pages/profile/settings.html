@@ -1,0 +1,51 @@
+<form class="settings" method="post">
+    <div class="logoInput">
+        <img src="{{URL}}/resources/images/logos/logo-impusic-bg.png" alt="">
+        <div>
+            {{svg-camera}}
+        </div>
+    </div>
+    
+    <div class="textInput">
+        <input name="name" type="text" placeholder="Insira aqui o seu nome" value="{{name}}">
+    </div>
+    
+    <div class="textInput">
+        <textarea name="description" id="description" cols="30" rows="10" maxlength="1000" placeholder="Insira aqui a sua biografia">{{description}}</textarea>
+    </div>
+
+    <div class="textInput">
+        <input name="location" type="text" placeholder="Insira aqui sua localização" value="{{location}}">
+    </div>
+
+    <div class="socialMedias">
+        <div class="textInput cardLink">
+            {{svg-spotify}}
+            <input name="spotify" type="text" placeholder="Spotify" value="{{spotify}}">
+        </div>
+
+        <div class="textInput cardLink">
+            {{svg-soundcloud}}
+            <input name="soundcloud" type="text" placeholder="SoundCloud" value="{{soundcloud}}">
+        </div>
+
+        <div class="textInput cardLink">
+            {{svg-instagram}}
+            <input name="instagram" type="text" placeholder="Instagram" value="{{instagram}}">
+        </div>
+
+        <div class="textInput cardLink">
+            {{svg-facebook}}
+            <input name="facebook" type="text" placeholder="Facebook" value="{{facebook}}">
+        </div>
+
+        <div class="textInput cardLink">
+            {{svg-discord}}
+            <input name="discord" type="text" placeholder="Discord" value="{{discord}}">
+        </div>
+    </div>
+
+    <div class="submit">
+        <button type="submit">Submit</button>
+    </div>
+</form>

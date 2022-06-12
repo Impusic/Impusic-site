@@ -1,0 +1,261 @@
+:root{
+    --formBackground: #282828;
+
+    --input-border-normal: rgba(128, 128, 128, 0.3);
+    --input-border-hover: rgba(128, 128, 128, 0.9);
+
+    --input-label-color-normal: rgba(128, 128, 128, 0.9);
+
+    --form-title-color: rgb(223, 223, 223);
+    --form-description-color: rgb(139, 139, 139);
+}
+
+.videoDetails > form{
+    width: 80vw;
+
+    background-color: var(--formBackground);
+    border-radius: 5px;
+
+    padding: 50px 0;
+
+    display: grid;
+    justify-content: center;
+
+    margin: 50px auto;
+}
+.videoDetails > form .inputBox{
+    border: thin solid var(--input-border-normal);
+    border-radius: 5px;
+    padding: 10px;
+
+    width: 100%;
+
+    transition: .3s;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 5px;
+}
+.videoDetails > form .inputBox:hover{
+    border: thin solid var(--input-border-hover);
+}
+.videoDetails > form .inputBox > label{
+    color: var(--input-label-color-normal);
+
+    font-size: 12px;
+    font-weight: 300;
+}
+.videoDetails > form .inputBox > textarea{
+    background-color: transparent;
+    resize: none;
+    font-size: 15px;
+
+    color: var(--text);
+}
+.inputBoxDescription{
+    height: 250px;
+}
+.videoDetails > form .inputBox > textarea:focus{
+    outline: none;
+}
+.videoDetails > form .inputBox > textarea::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+}
+.videoDetails > form .inputBox > textarea::-webkit-scrollbar-track {
+    background: transparent;
+}
+.videoDetails > form .inputBox > textarea::-webkit-scrollbar-thumb {
+    background-color: var(--input-border-normal);
+    border-radius: 2px;
+}
+
+.videoDetails > form .selectBox{
+    padding: 10px 5px;
+
+    width: 500px;
+
+    transition: .3s;
+
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 5px;
+}
+.videoDetails > form .selectBox > h1,
+.videoDetails > form .searchMusic > h1{
+    color: var(--form-title-color);
+
+    font-size: 16px;
+    font-weight: 500;
+}
+.videoDetails > form .selectBox > span{
+    color: var(--text-unavaliable);
+    font-style: italic;
+    font-size: 10px;
+}
+.videoDetails > form .selectBox > h2,
+.videoDetails > form .searchMusic > h2{
+    color: var(--form-description-color);
+
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+.videoDetails > form .selectBox > div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.videoDetails > form .selectBox > div > .selectThumbnail{
+    width: 200px;
+    height: 100px;
+    border: thin dashed var(--input-border-normal);
+
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+
+    transition: .2s;
+    cursor: pointer;
+}
+
+.videoDetails > form .selectBox > div > .showThumbnail,
+.videoDetails > form .selectBox > div > .showThumbnail > img{
+    width: 200px;
+    height: 100px;
+    transition: .5s;
+
+    position: relative;
+}
+
+.videoDetails > form .selectVideo > div{
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
+}
+.videoDetails > form .selectVideo > div > .showThumbnail{
+    width: 300px;
+    height: auto;
+
+    background-color: red;
+}
+
+.videoDetails > form .selectBox > div > .showThumbnail > h1{
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 300;
+    opacity: 0;
+
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 2;
+
+    transition: .5s;
+}
+.videoDetails > form .selectBox > div > .showThumbnail:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.videoDetails > form .selectBox > div > .showThumbnail:hover > h1{
+    opacity: 100%;
+}
+
+
+.videoDetails > form .selectBox > div >  .selectThumbnail:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.videoDetails > form .selectBox > div > .selectThumbnail > p{
+    max-width: 80%;
+    text-align: center;
+
+    color: var(--form-description-color);
+
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#selectThumbnailInput,
+#selectVideoInput{
+    display: none;
+}
+.videoDetails > form .publishButton > button{
+    width: 25%;
+    float: right;
+
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+.videoDetails > form .publishButton > button:hover{
+    background-color: var(--form-description-color);
+}
+.videoDetails > form .publishButtonDisabled > button{
+    background-color: var(--text-unavaliable);
+    color: var(--formBackground);
+    cursor: inherit;
+}
+.videoDetails > form .publishButtonDisabled > button:hover{
+    background-color: var(--text-unavaliable);
+}
+
+.videoDetails > form h1{
+    width: 100%;
+    color: var(--form-title-color);
+    font-size: 20px;
+
+    margin: 0 auto;
+}
+
+.videoDetails > form .musics{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    width: 900px;
+}
+.videoDetails > form .musics > div{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px;
+    margin: 5px 0;
+    width: 40%;
+}
+.videoDetails > form .musics > div > .musicThumbnail > img,
+.videoDetails > form .musics > div > .musicThumbnail{
+    width: 65px;
+    height: 65px;
+}
+.videoDetails > form .musics > div > .musicInfo{
+    color: var(--text);
+}
+.videoDetails > form .musics > div > .musicInfo > h1{
+    font-weight: 900;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.videoDetails > form .musics > div > .musicInfo > h2{
+    font-weight: 300;
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.videoDetails > form .musics > div > .musicInfo > h3{
+    font-weight: 300;
+    font-size: 10px;
+}
+.videoDetails > form .deezerLogo{
+    width: 14px;
+    vertical-align: middle;
+    margin: 0 5px;
+    opacity: 50%;
+}

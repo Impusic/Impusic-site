@@ -1,0 +1,117 @@
+:root{
+    --wh-logoInput: 150px;
+}
+
+.settings{
+    display: grid;
+    padding: 30px;
+    margin: 150px auto;
+
+    width: 80vw;
+
+    border-radius: 10px;
+}
+
+.logoInput{
+    width: var(--wh-logoInput);
+    height: var(--wh-logoInput);
+
+    position: relative;
+}
+.logoInput > img{
+    width: var(--wh-logoInput);
+    height: var(--wh-logoInput);
+
+    border-radius: 100%;
+
+    position: absolute;
+    cursor: pointer;
+}
+.logoInput > div{
+    opacity: 50%;
+    transition: .3s;
+
+    --w-logoInput-div: 60px;
+
+    top: calc(50% - calc(var(--w-logoInput-div) / 2));
+    left: calc(50% - calc(var(--w-logoInput-div) / 2));
+
+    width: var(--w-logoInput-div);
+    height: var(--w-logoInput-div);
+
+    background-color: rgba(0, 0, 0, 0.6);
+
+    border-radius: 100%;
+
+    position: absolute;
+
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+}
+.logoInput:hover > div{
+    opacity: 100%;
+}
+
+.textInput{
+    margin-top: 40px;
+    display: grid;
+}
+.textInput > input,
+.textInput > textarea{
+    background-color: transparent;
+    border: thin solid gray;
+    color: white;
+
+    font-weight: 300;
+
+    border-radius: 5px;
+    padding: 8px;
+}
+.textInput > input:focus,
+.textInput > textarea:focus{
+    outline: none;
+}
+.textInput > input::placeholder,
+.textInput > textarea::placeholder{
+    color: gray;
+}
+.textInput + .textInput{
+    margin-top: 20px;
+}
+.textInput > textarea{
+    resize: none;
+}
+
+.socialMedias{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 20px;
+
+    text-align: center;
+
+    margin: 20px 0;
+}
+.socialMedias > .textInput{
+    margin: 0 !important;
+}
+.socialMedias > .cardLink{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.submit{
+    margin: 20px 0;
+}
+.submit > button{
+    background-color: #86b049;
+    padding: 12px 26px;
+    border-radius: 5px;
+
+    font-weight: 700;
+    color: rgb(229, 255, 231);
+
+    cursor: pointer;
+}
