@@ -18,10 +18,10 @@ Impusic é um projeto brasileiro composto por quatro desenvolvedores. A ideia pr
 
 | Cor               | Hexadecimal                                                |
 | ----------------- | ---------------------------------------------------------------- |
-| Cor Principal da Logo       | ![#8c0ceb](https://via.placeholder.com/10/8c0ceb?text=+) #8c0ceb |
-| Cor Segundária da Logo       | ![#df17fc](https://via.placeholder.com/10/df17fc?text=+) #df17fc |
-| Cor Principal de Fundo       | ![#000000](https://via.placeholder.com/10/000000?text=+) #000000 |
-| Cor Segundária de Fundo       | ![#2b2b2b](https://via.placeholder.com/10/2b2b2b?text=+) #2b2b2b |
+| Cor Principal da Logo       | ![#8c0ceb](https://singlecolorimage.com/get/8c0ceb/10x10) #8c0ceb |
+| Cor Segundária da Logo       | ![#df17fc](https://singlecolorimage.com/get/df17fc/10x10) #df17fc |
+| Cor Principal de Fundo       | ![#000000](https://singlecolorimage.com/get/000000/10x10) #000000 |
+| Cor Segundária de Fundo       | ![#2b2b2b](https://singlecolorimage.com/get/2b2b2b/10x10) #2b2b2b |
 
 
 ## Variáveis de Ambiente
