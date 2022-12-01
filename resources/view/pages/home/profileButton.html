@@ -1,8 +1,8 @@
 <div class="profile">
     <a href="{{URL}}/profile/{{user}}">
-        <img src="{{URL}}/resources/images/logos/logo-impusic-bg.png" alt="">
+        <img src="{{URL}}/resources/icons/profile_{{id}}.png" onerror="this.src='{{URL}}/resources/icons/profile_default.png';" alt="">
     </a>
-    <form method="post" action="/tcc/logout">
+    <form method="get" action="{{URL}}/logout">
         <button type="submit">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </button>

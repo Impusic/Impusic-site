@@ -1,5 +1,9 @@
 :root{
     --wh-logoInput: 150px;
+
+    --banner-calc: 1.7;
+    --banner-width-calc: calc(1240px / var(--banner-calc));
+    --banner-height-calc: calc(217px / var(--banner-calc));
 }
 
 .settings{
@@ -11,6 +15,41 @@
 
     border-radius: 10px;
 }
+
+.imagesInputs{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+
+    gap: 20px;
+}
+.bannerInput{
+    width: var(--banner-width-calc);
+    height: var(--banner-height-calc);
+    position: relative;
+    cursor: pointer;
+}
+.bannerInput > img{
+    width: var(--banner-width-calc);
+    height: var(--banner-height-calc);
+
+    object-fit: cover !important;
+}
+
+.size-recommended{
+    color: gray;
+    font-size: 8px;
+    text-align: center;
+    min-width: var(--wh-logoInput);
+    padding: 4px 0;
+}
+
+
+
+
+
+
 
 .logoInput{
     width: var(--wh-logoInput);
@@ -27,7 +66,8 @@
     position: absolute;
     cursor: pointer;
 }
-.logoInput > div{
+.logoInput > div,
+.bannerInput > div{
     opacity: 50%;
     transition: .3s;
 
@@ -50,7 +90,8 @@
     align-content: center;
     cursor: pointer;
 }
-.logoInput:hover > div{
+.logoInput:hover > div,
+.bannerInput:hover > div{
     opacity: 100%;
 }
 

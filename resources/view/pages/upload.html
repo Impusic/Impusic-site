@@ -8,39 +8,55 @@
 </style>
 
 <!-- PLAYER DE VÍDEO -->
-<link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css" />
-<script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
 
 <div class="videoDetails">
     <form method="post" enctype="multipart/form-data">
         <h1>Publicar vídeo:</h1>
 
+        <div class="selectType">
+            <h1>Selecionar o tipo do conteúdo<span class="obrigatoryStar">*</span></h1>
+            <h2>Selecione qual tipo de conteúdo deseja publicar.</h2>
+            <div>
+                <label>Vídeo
+                    <input type="radio" name="typeVideo" id="" checked>
+                    <span class="checkmark"></span>
+                </label>
+    
+                <label>Shorts
+                    <input type="radio" name="typeVideo" id="">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+
         <div class="selectBox selectVideo">
-            <h1>Vídeo</h1>
+            <h1>Vídeo<span class="obrigatoryStar">*</span></h1>
             <span class="comment">(limite máximo: 15 minutos)</span>
             <h2>Selecione o vídeo que deseja publicar. Uma boa edição faz com que seu vídeo seja melhor recepcionado por seus espectadores.</h2>
             
             <div>
-                <div class="selectThumbnail" onclick="openVideoThumbnail()">
-                    <p><i class="fa-solid fa-video"></i></p>
-                    <p>Fazer upload do vídeo</p>
+                <div>
+                    <div class="selectThumbnail" onclick="openVideoThumbnail()">
+                        <p><i class="fa-solid fa-video"></i></p>
+                        <p>Fazer upload do vídeo</p>
+                    </div>
+                    <p class="playerWarning">"Este é o <i>player</i> de pré-visualização do seu vídeo, caso queira trocar pressione o botão 'Fazer upload do vídeo' novamente."</p>
                 </div>
-    
                 <div class="showThumbnail">
-                    <video id="player" playsinline controls>
+                    <video id="player" controls>
                         <source id="videoPreview" src="#" type="video/mp4" />
                     </video>
                 </div>
             </div>
 
-            <input type="file" name="video" id="selectVideoInput">
+            <input onchange="verifyUploadInputs()" type="file" name="video" required id="selectVideoInput">
         </div>
 
         <br>
 
         <div class="inputBox">
             <label for="">Título (obrigatório)</label>
-            <textarea name="title" required maxlength="100" placeholder="Adicione um título ao seu vídeo"></textarea>
+            <textarea onkeyup="verifyUploadInputs()" id="videoTitle" name="title" required maxlength="100" placeholder="Adicione um título ao seu vídeo"></textarea>
         </div>
 
         <br>
@@ -56,7 +72,7 @@
             <h1>Música</h1>
             <h2>Selecione uma música que será exibido na página do seu vídeo. Caso não tenha ou possua mais de um, você pode simplesmente ignorar.</h2>
             <div class="inputBox">
-                <textarea id="musicName" name="title" required maxlength="100" placeholder="Procure a música aqui"></textarea>
+                <textarea id="musicName" maxlength="100" placeholder="Procure a música aqui"></textarea>
             </div>
 
             <div class="musics" id="musics">
@@ -66,7 +82,7 @@
         <br>
 
         <div class="selectBox">
-            <h1>Miniatura</h1>
+            <h1>Miniatura<span class="obrigatoryStar">*</span></h1>
             <span class="comment">(recomendado: 1920x1080)</span>
             <h2>Selecione ou faça upload de uma imagem que mostre o que há no seu vídeo. Uma boa miniatura se destaca e chama a atenção dos espectadores.</h2>
             
@@ -82,10 +98,10 @@
                 </div>
             </div>
 
-            <input type="file" name="thumbnail" id="selectThumbnailInput">
+            <input type="file" onchange="verifyUploadInputs()" required name="thumbnail" id="selectThumbnailInput">
         </div>
 
-        <div class="publishButton publishButtonDisabled">
+        <div id="publishButtonUpload" class="publishButtonUpload publishButtonDisabledUpload">
             <button type="submit">Publicar</button>
         </div>
     </form>

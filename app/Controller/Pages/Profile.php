@@ -4,6 +4,7 @@ namespace App\Controller\Pages;
 
 use \App\Utils\View;
 use \App\Model\Entity\Channel as EntityChannel;
+use \App\Model\Entity\Follows as EntityFollows;
 use \App\Model\Entity\Videos as EntityVideos;
 use \App\Model\Entity\Organization;
 use \App\Session\Admin\Login as SessionAdminLogin;
@@ -66,15 +67,41 @@ class Profile extends Page{
         $videoCard = '';
 
         $results = EntityVideos::getVideos('channelId = '.$obUser->id,'id DESC');
+        $idNumber = 0;
 
+        
+
+        $login = SessionAdminLogin::getLogin();
         while($obVideo = $results->fetchObject(EntityVideos::class)){
-            $time = self::time2str($obVideo->date);
+            $idNumber++;
 
+            //VERIFICA SE ESTÁ LOGADO, SE SIM, VERIFICA SE É O USUÁRIO QUE COMENTOU
+            if($login !== null){
+                $obUser = EntityChannel::getChannelByUser($login['user']);
+                if($obUser->user === $obVideo->channelUser){
+                    $optionsVideo = View::render('pages/watch/optionsOwnerVideo', [
+                        'idNumber' => $idNumber,
+                        'video' => $obVideo->video
+                    ]);
+                }else{
+                    $optionsVideo = View::render('pages/watch/optionsViewerVideo', [
+                        'idNumber' => $idNumber,
+                    ]);
+                }
+            }else{
+                $optionsVideo = View::render('pages/watch/optionsViewerVideo', [
+                    'idNumber' => $idNumber,
+                ]);
+            }
+
+            $time = self::time2str($obVideo->date);
             $itens .= View::render('pages/profile/videoCard',[
+                'idNumber' => $idNumber,
                 'videoTitle' => $obVideo->title,
                 'channel' => $obVideo->channel,
                 'channelUser' => $obVideo->channelUser,
                 'thumbnail' => $obVideo->thumbnail,
+                'optionsVideo' => $optionsVideo,
                 'time' => $time,
                 'link' => trim($obVideo->video)
             ]);
@@ -82,6 +109,50 @@ class Profile extends Page{
 
         return $itens;
     }
+
+    public static function setFollow($user,$request){
+        $login = SessionAdminLogin::getLogin();
+        $obUser = EntityChannel::getChannelByUser($user);
+        $obUserLogged = EntityChannel::getChannelByUser($login['user']);
+
+        if($obUser == null or empty($obUser)){
+            $request->getRouter()->redirect('?status=usernotfound');
+        }else if($login == null){
+            $request->getRouter()->redirect('/profile/'.$obUser->user.'/?status=loginneeded');
+        }else if($obUserLogged == null or empty($obUserLogged)){
+            $request->getRouter()->redirect('/profile/'.$obUser->user);
+        }
+
+        $obFollows = new EntityFollows;
+        $obFollows->idFollow = $obUserLogged->id;
+        $obFollows->idUser = $obUser->id;
+        $obFollows->cadastrar();
+
+        $request->getRouter()->redirect('/profile/'.$obUser->user);
+    }
+
+    public static function setUnfollow($user,$request){
+        $login = SessionAdminLogin::getLogin();
+        $obUser = EntityChannel::getChannelByUser($user);
+        $obUserLogged = EntityChannel::getChannelByUser($login['user']);
+
+        if($obUser == null or empty($obUser)){
+            $request->getRouter()->redirect('');
+        }else if($obUserLogged == null or empty($obUserLogged)){
+            $request->getRouter()->redirect('/profile/'.$obUser->user);
+        }
+
+        $obFollows = new EntityFollows;
+        $idUser = EntityFollows::getFollows('idUser = '.$obUser->id);
+        while($obFollows = $idUser->fetchObject(EntityFollows::class)){
+            if($obUserLogged->id == $obFollows->idFollow){
+                $obFollows->excluir($obFollows->id);
+            }
+        }
+
+        $request->getRouter()->redirect('/profile/'.$obUser->user);
+    }
+
     /**
      * Método responsável por retornar o conteúdo (view) da nossa Home
      * @return string
@@ -90,30 +161,38 @@ class Profile extends Page{
         //Organização
         $obOrganization = new Organization;
 
-        if(!SessionAdminLogin::isLogged()){
-            return false;
-        }
         $login = SessionAdminLogin::getLogin();
         $obUser = EntityChannel::getChannelByUser($user);
-
-        if($obUser->user == $login['user']){
-            $follow = View::render('pages/profile/editContainer', [
-            ]);
+        if($login !== null){
+            $obUserLogged = EntityChannel::getChannelByUser($login['user']);
+            $obUserLoggedId = $obUserLogged->id;
         }else{
-            $follow = View::render('pages/profile/followContainer', [
-            ]);
+            $login['user'] = 0;
+            $obUserLoggedId = 0;
         }
 
         // ADICIONA ELLIPSIS SE A DESCRIÇÃO FOR MAIOR QUE 35C
-        $minDesc = $obUser->description;
-        $pageTitle = strlen($minDesc) > 35 ? substr($minDesc,0,35)."..." : $minDesc;
+        /* $minDesc = $obUser->description;
+        $pageTitle = strlen($minDesc) > 35 ? substr($minDesc,0,35)."..." : $minDesc; */
 
         // ADICIONA VEJA MAIS SE A DESCRIÇÃO FOR MAIOR QUE 35C
-        if($obUser->description !== null && strlen($obUser->description) > 35){
+        /* if($obUser->description !== null && strlen($obUser->description) > 35){
             $seeMore = 'Veja Mais.';
         }else{
             $seeMore = '';
+        } */
+
+
+        $sizeDescription = 50;
+        if(strlen($obUser->description) > $sizeDescription){
+            $accountDescription = substr($obUser->description, 0 , $sizeDescription-3).'...';
+            $seeMore = 'Veja Mais.';
+        }else{
+            $accountDescription = $obUser->description;
+            $seeMore = '';
         }
+
+        $user_id = ($obUser->id == null ? 'default' : $obUser->id);
 
         $spotify_link = ($obUser->spotify == null ? '' : $obUser->spotify);
         $spotify_svg = ($obUser->spotify == null ? '' : parent::getSvg('spotify',null,null,null,'white'));
@@ -130,15 +209,15 @@ class Profile extends Page{
         $discord_link = ($obUser->discord == null ? '' : $obUser->discord);
         $discord_svg = ($obUser->discord == null ? '' : parent::getSvg('discord',null,null,null,'white'));
 
-        $idFollows = EntityChannel::getFollows('idFollow = '.$obUser->id);
+        $idFollows = EntityFollows::getFollows('idFollow = '.$obUser->id);
         $follows = 0;
-        while($obFollows = $idFollows->fetchObject(EntityChannel::class)){
+        while($obFollows = $idFollows->fetchObject(EntityFollows::class)){
             $follows++;
         }
 
-        $idUser = EntityChannel::getFollows('idUser = '.$obUser->id);
+        $idUser = EntityFollows::getFollows('idUser = '.$obUser->id);
         $following = 0;
-        while($obFollows = $idUser->fetchObject(EntityChannel::class)){
+        while($obFollows = $idUser->fetchObject(EntityFollows::class)){
             $following++;
         }
 
@@ -147,13 +226,45 @@ class Profile extends Page{
         while($obVideos = $videos->fetchObject(EntityChannel::class)){
             $videosCount++;
         }
+
+        // VERIFICA SE O SEU USUÁRIO SEGUE O PERFIL QUE ESTÁ SENDO EXIBIDO
+        $idUser = EntityFollows::getFollows('idUser = '.$obUser->id);
+        $follow = false;
+        while($obFollows = $idUser->fetchObject(EntityFollows::class)){
+            if($obUserLoggedId == $obFollows->idFollow){
+                $follow = true;
+            }else{
+                if($follow !== true){
+                    $follow = false;
+                }
+            }
+        }
+
+        // VERIFICA QUAL É O PAPER BUTTON QUE DEVE SER EXIBIDO
+        if($obUser->user == $login['user']){
+            //PAPER BUTTON DE EDITAR PERFIL
+            $paperButton = View::render('pages/profile/editContainer', [
+            ]);
+        }else if($obUser->user !== $login['user'] && $follow == true){
+            //PAPER BUTTON DE SEGUINDO (COM OPÇÃO PARA DEIXAR DE SEGUIR)
+            $paperButton = View::render('pages/profile/followingContainer', [
+                'user' => $obUser->user
+            ]);
+        }else{
+            //PAPER BUTTON DE SEGUIR (COM OPÇÃO PARA SEGUIR)
+            $paperButton = View::render('pages/profile/followContainer', [
+                'user' => $obUser->user
+            ]);
+        }
         
         //VIEW DA HOME
         $content = View::render('pages/profile',[
             'name' => $obUser->name,
-            'description' => $minDesc,
+            'id' => $user_id,
+            'accountDescription' => nl2br($accountDescription),
+            'allAccountDescription' => nl2br($obUser->description),
             'seeMore' => $seeMore,
-            'follow' => $follow,
+            'paperButton' => $paperButton,
             'follows' => $follows,
             'following' => $following,
             'videosCount' => $videosCount,
@@ -177,7 +288,7 @@ class Profile extends Page{
             //TITLE DA PÁGINA
             $obUser->name.' - '.$obOrganization->name,
             //DESCRIÇÃO DA PÁGINA
-            'Bem-vindos ao RiftMaker.com - Análise as estatísticas de invocadores, melhores campeões, ranking competitivo, times de Clash, Profissionais e muito mais',
+            $obOrganization->description,
             //CONTEUDO DA PÁGINA
             $content
         );
@@ -191,6 +302,7 @@ class Profile extends Page{
         $obUser = EntityChannel::getChannelByUser($login['user']);
 
         $user_name = ($obUser->name == null ? '' : $obUser->name);
+        $user_id = ($obUser->id == null ? 'default' : $obUser->id);
         $user_description = ($obUser->description == null ? '' : $obUser->description);
         $user_location = ($obUser->location == null ? '' : $obUser->location);
         $user_spotify = ($obUser->spotify == null ? '' : $obUser->spotify);
@@ -208,6 +320,7 @@ class Profile extends Page{
             'svg-facebook' => parent::getSvg('facebook',null,null,null,'gray'),
             'svg-soundcloud' => parent::getSvg('soundcloud',null,null,null,'gray'),
             'name' => $user_name,
+            'id' => $user_id,
             'description' => $user_description,
             'location' => $user_location,
             'spotify' => $user_spotify,
@@ -238,6 +351,19 @@ class Profile extends Page{
         $obUser = EntityChannel::getChannelByUser($login['user']);
 
         $postVars = $request->getPostVars();
+
+        if(isset($_FILES['inputIcon']) && $_FILES['inputIcon']['name'] !== '' or $_FILES['inputIcon'] !== '' or $_FILES['inputIcon'] !== null){
+            $newname = 'profile_'.trim($obUser->id).'.png';
+            $target = 'resources/icons/'.$newname;
+            move_uploaded_file($_FILES['inputIcon']['tmp_name'],$target);
+        }
+
+        if(isset($_FILES['inputBanner']) && $_FILES['inputBanner']['name'] !== '' or $_FILES['inputBanner'] !== '' or $_FILES['inputBanner'] !== null){
+            $newname = 'profile_'.trim($obUser->id).'.png';
+            $target = 'resources/banners/'.$newname;
+            move_uploaded_file($_FILES['inputBanner']['tmp_name'],$target);
+        }
+
         $name = ($postVars['name'] == null ? $obUser->name : $postVars['name']);
         $description = ($postVars['description'] == null ? $obUser->description : $postVars['description']);
         $location = ($postVars['location'] == null ? $obUser->location : $postVars['location']);

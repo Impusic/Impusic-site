@@ -55,6 +55,12 @@ class Videos{
     public $video;
 
     /**
+     * ID da música
+     * @var integer
+     */
+    public $musicId;
+
+    /**
      * Data do video
      * @var string
      */
@@ -74,6 +80,7 @@ class Videos{
             'channelId' => $this->channelId,
             'thumbnail' => $this->thumbnail,
             'video' => $this->video,
+            'musicId' => $this->musicId,
             'date' => $this->date
         ]);
 
@@ -94,6 +101,7 @@ class Videos{
             'channelId' => $this->channelId,
             'thumbnail' => $this->thumbnail,
             'video' => $this->video,
+            'musicId' => $this->musicId,
             'date' => $this->date
         ]);
     }
@@ -102,8 +110,8 @@ class Videos{
      * Método responsável por excluir um usuário do banco
      * @return boolean
      */
-    public function excluir(){
-        return (new Database('videos'))->delete('id = '.$this->id);
+    public function excluir($id){
+        return (new Database('videos'))->delete('id = '.$id);
     }
 
     /**
@@ -121,7 +129,7 @@ class Videos{
      * @return User
      */
     public static function getVideoByLink($id){
-        return self::getVideos('video = '.$id)->fetchObject(self::class);
+        return self::getVideos('video = "'.$id.'"')->fetchObject(self::class);
     }
 
     /**

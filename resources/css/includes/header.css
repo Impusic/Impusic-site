@@ -26,6 +26,45 @@
 
     --color-a: rgb(9, 142, 213);
     --color-a-hover: rgb(0, 166, 255);
+
+
+
+
+
+    /* IOS DARK THEME PALLETE */
+    --label: #FFFFFF;
+    --secondary-label: #F3F3F8;
+    --tertiary-label: #F8F8FC;
+    --quaternary-label: #FBFBFD;
+
+    --description: rgb(169, 169, 169);
+    
+    --gray-1: #8E8E93;
+    --gray-2: #636366;
+    --gray-3: #48484A;
+    --gray-4: #3A3A3C;
+    --gray-5: #2C2C2E;
+    --gray-6: #1C1C1E;
+
+    --link: #0B84FF;
+    --secondary-link: #0467c9;
+
+    --blue: #0A84FF;
+    --secondary-blue: #0661bc;
+    --green: #30D158;
+    --secondary-green: #20963d;
+    --red: #FF453A;
+    --purple: #BF5AF2;
+    --secondary-purple: #9a40c7;
+
+    --placeholder: #F8F8FC;
+
+    --opaque-separator: #38383A;
+
+
+
+
+
 }
 
 * {
@@ -71,11 +110,11 @@ body::-webkit-scrollbar-track {
   
 
 a{
-    color: var(--color-a);
+    color: var(--link);
     transition: .3s;
 }
 a:hover{
-    color: var(--color-a-hover);
+    color: var(--secondary-link);
 }
 
 
@@ -117,7 +156,7 @@ header > #itens li{
     text-align: center;
 
     text-decoration: none;
-    color: var(--text);
+    color: var(--label);
 
     font-weight: 100;
 
@@ -128,7 +167,7 @@ header > #itens a + a{
 }
 header > #itens a:hover,
 header > #itens li:hover{
-    color: var(--text-hover);
+    color: var(--gray-1);
 }
 header > #itens button{
     background: var(--color-theme-one);
@@ -166,9 +205,9 @@ header > #search > div > input{
     height: 100%;
 
     background-color: transparent;
-    border: thin solid white;
+    border: thin solid var(--label);
     border-radius: 10px;
-    color: var(--text);
+    color: var(--quaternary-label);
 
 
     padding: 5px 10px;
@@ -176,13 +215,13 @@ header > #search > div > input{
     font-weight: 200;
 }
 header > #search > div > input::placeholder{
-    color: var(--text-hover);
+    color: var(--placeholder);
 }
 header > #search > div > input:focus{
     outline: none;
 }
 header > #search > div > label{
-    color: var(--text);
+    color: var(--label);
     position: absolute;
     right: 10px;
     font-size: 13px;
@@ -191,7 +230,7 @@ header > #search > div > label{
     transition: .3s;
 }
 header > #search > div > label:hover{
-    color: var(--text-hover);
+    color: var(--quaternary-label);
 }
 
 header > #itens > .profile{
@@ -204,12 +243,12 @@ header > #itens > .profile > form > button{
     all: inherit;
 }
 header > #itens > .profile > form > button > i{
-    color: var(--text);
+    color: var(--label);
     cursor: pointer;
     transition: .3s;
 }
 header > #itens > .profile > form > button > i:hover{
-    color: var(--text-hover);
+    color: var(--quaternary-label);
 }
 header > #itens > .profile > a > img{
     width: 50px;
@@ -230,7 +269,9 @@ footer{
     justify-content: center;
     padding: 0 40px;
 
-    color: var(--text);
+    color: var(--label);
+
+    margin-top: 75px;
 }
 footer > div{
     width: 25%;
@@ -246,14 +287,15 @@ footer > div > .footer-hr{
     width: 25%;
     margin: 2px 0 5px -20px;
     height: 1px;
-    background-color: var(--text);
+    background-color: var(--tertiary-label);
 }
 footer > div > h1{
     font-size: 16px;
+    color: var(--label);
 }
 footer > div > a,
 footer > div > p{
-    color: var(--text);
+    color: var(--quaternary-label);
     display: block;
     font-size: 12px;
     font-weight: 100;
@@ -262,11 +304,13 @@ footer > div > p{
     transition: .3s;
 }
 footer > div > a:hover{
-    color: var(--text-hover);
+    color: var(--gray-1);
 }
+
+
 .copy{
     width: 100%;
-    color: var(--text);
+    color: var(--label);
     text-align: center;
     font-weight: 100;
     font-size: 10px;
@@ -322,5 +366,74 @@ footer > div > a:hover{
     }
     100%{
         display: none;
+    }
+}
+.hidden{
+    display: none;
+}
+.invisibleItem{
+    position: absolute;
+    top: -1000px;
+    right: 1000px;
+    opacity: 0;
+}
+
+@media screen and (max-width: 1000px){
+    header > #search{
+        display: none;
+    }
+    footer > div > a,
+    footer > div > p{
+        max-height: 120px;
+        text-align: justify;
+    }
+    footer > div{
+        width: 100%;
+        height: auto;
+    }
+
+    footer > div:nth-child(1){
+        grid-area: one;
+    }
+    footer > div:nth-child(2){
+        grid-area: two;
+    }
+    footer > div:nth-child(3){
+        grid-area: three;
+    }
+    footer > div:nth-child(4){
+        grid-area: four;
+    }
+    footer{
+        height: auto;
+    
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+
+        justify-content: center;
+        justify-items: center;
+
+        grid-template-areas: 
+        'three four'
+        'one two';
+    }
+}
+@media screen and (max-width: 550px) {
+    :root{
+        --header-height: 120px;
+    }
+    header{
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        align-content: center;
+    }
+    footer > div:first-child{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }

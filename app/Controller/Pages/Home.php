@@ -126,7 +126,7 @@ class Home extends Page{
             //TITLE DA PÁGINA
             $obOrganization->name,
             //DESCRIÇÃO DA PÁGINA
-            'Bem-vindos ao RiftMaker.com - Análise as estatísticas de invocadores, melhores campeões, ranking competitivo, times de Clash, Profissionais e muito mais',
+            $obOrganization->description,
             //CONTEUDO DA PÁGINA
             $content
         );

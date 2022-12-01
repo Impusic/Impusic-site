@@ -1,9 +1,27 @@
-<form class="settings" method="post">
-    <div class="logoInput">
-        <img src="{{URL}}/resources/images/logos/logo-impusic-bg.png" alt="">
+<form class="settings" method="post" enctype="multipart/form-data">
+    <div class="imagesInputs">
         <div>
-            {{svg-camera}}
+            <p class="size-recommended">Recomendado: 150x150px</p>
+            <div class="logoInput" onclick="openInputIcon('inputIcon')">
+                <img id="iconProfile" src="{{URL}}/resources/icons/profile_{{id}}.png" onerror="this.src='{{URL}}/resources/icons/profile_default.png';" alt="">
+                <div>
+                    {{svg-camera}}
+                </div>
+            </div>
         </div>
+        <input type="file" class="invisibleItem" name="inputIcon" id="inputIcon" accept="image/png image/jpeg image/jpg" />
+        
+
+        <div>
+            <p class="size-recommended">Recomendado: 1240x217px</p>
+            <div class="bannerInput" onclick="openInputIcon('inputBanner')">
+                <img id="bannerProfile" src="{{URL}}/resources/banners/profile_{{id}}.png" onerror="this.src='{{URL}}/resources/banners/banner_default.jpg'" alt="">
+                <div>
+                    {{svg-camera}}
+                </div>
+            </div>
+        </div>
+        <input type="file" class="invisibleItem" name="inputBanner" id="inputBanner" accept="image/png image/jpeg image/jpg" />
     </div>
     
     <div class="textInput">

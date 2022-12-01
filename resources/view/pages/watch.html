@@ -1,20 +1,56 @@
 <!-- PLAYER DE VÍDEO -->
-<link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css" />
-<script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
+<script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+<script src="https://vjs.zencdn.net/7.19.2/video.min.js"></script>
 
+<link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" />
+<link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet">
 
 <div class="videoContainer">
     <div class="videoPlayer">
-        <div>
-            <video id="player" playsinline controls autoplay data-poster="/path/to/poster.jpg">
+        <div class="videoDiv">
+            <video
+                id="player"
+                class="video-js vjs-custom-theme"
+                controls
+                poster="{{URL}}/resources/thumbnail/{{thumbnail}}.png"
+                data-setup="{}"
+                autoplay
+            >
                 <source src="{{URL}}/resources/videos/{{video}}.mp4" type="video/mp4" />
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
             </video>
         </div>
         <div class="header">
-            <h1 id="videoTitle">{{title}}</h1>
-            <span>
-                <p><i class="fa-solid fa-angle-up"></i> <span id="likes">0</span></p>
-            </span>
+            <div class="videoTitle">
+                <h1 id="videoTitle">{{title}}</h1>
+                <span>
+                    <p><i class="fa-solid fa-angle-up"></i> <span id="likes">0</span></p>
+                </span>
+            </div>
+            <div class="videoChannel">
+                <a href="{{URL}}/profile/{{channelUser}}"><img src="{{URL}}/resources/icons/profile_{{channelId}}.png" onerror="this.src='{{URL}}/resources/icons/profile_default.png';" alt=""></a>
+                <a href="{{URL}}/profile/{{channelUser}}"><h2>{{channel}}</h2></a>
+            </div>
+            <div class="musicDeezer">
+                <p id="musicId" hidden>{{musicId}}</p>
+                <div class="music">
+                    <div>
+                        <img id="musicCover">
+                    </div>
+                    <div>
+                        <p id="musicTitle"></p>
+                        <p id="musicArtist"></p>
+                    </div>
+                    <a href="" id="musicLink" target="_blank">
+                        <img src="{{URL}}/resources/svg/deezerSet.svg" alt="Deezer">
+                    </a>
+                </div>
+            </div>
+            <p class="titleDescription">Descrição:</p>
             <h2>{{description}}</h2>
         </div>
     </div>
@@ -25,51 +61,22 @@
                     <span>
                         <i class="fa-solid fa-message"></i>
                     </span>
-                    <p>0</p>
+                    <p>{{countComments}}</p>
                 </h1>
             </div>
 
-            <div>
-                <div class="commentInput">
-                    <img src="https://via.placeholder.com/500?text=LOGO" alt="">
-                    <input type="text" placeholder="Adicione um comentário...">
-                    <button>Enviar</button>
-                </div>
+            <div class="sendComments">
+                <form class="commentInput" method="post" action="/tcc/comment">
+                    <img src="{{URL}}/resources/icons/profile_{{id}}.png" onerror="this.src='{{URL}}/resources/icons/profile_default.png';" alt="">
+                    <input type="text" name="text" placeholder="Adicione um comentário..." spellcheck="false" autocomplete="off">
+                    <input type="text" name="videoId" value="{{video}}" hidden>
+                    <button type="submit">Enviar</button>
+                </form>
             </div>
 
             <br>
 
-            <div class="commentBox">
-                <img src="https://via.placeholder.com/500?text=LOGO" alt="">
-                <div>
-                    <h1>Name Person</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus pariatur mollitia numquam sapiente ratione dignissimos nisi aperiam quasi odio totam deleniti, doloremque, a error quaerat eum dolorum temporibus ipsa voluptatum.</p>
-                </div>
-            </div>
-
-            <div class="commentBox">
-                <img src="https://via.placeholder.com/500?text=LOGO" alt="">
-                <div>
-                    <h1>Name Person</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus pariatur mollitia numquam sapiente ratione dignissimos nisi aperiam quasi odio totam deleniti, doloremque, a error quaerat eum dolorum temporibus ipsa voluptatum.</p>
-                </div>
-            </div>
-
-            <div class="commentBox">
-                <img src="https://via.placeholder.com/500?text=LOGO" alt="">
-                <div>
-                    <h1>Name Person</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus pariatur mollitia numquam sapiente ratione dignissimos nisi aperiam quasi odio totam deleniti, doloremque, a error quaerat eum dolorum temporibus ipsa voluptatum.</p>
-                </div>
-            </div>
-
-            <div class="commentBox">
-                <img src="https://via.placeholder.com/500?text=LOGO" alt="">
-                <div>
-                    <h1>Name Person</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus pariatur mollitia numquam sapiente ratione dignissimos nisi aperiam quasi odio totam deleniti, doloremque, a error quaerat eum dolorum temporibus ipsa voluptatum.</p>
-                </div>
-            </div>
+            {{commentBox}}
         </div>
     </div>
 </div>

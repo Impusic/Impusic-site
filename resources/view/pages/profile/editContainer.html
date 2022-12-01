@@ -1,4 +1,19 @@
 <a href="{{URL}}/settings/profile">
     <button class="edit">EDITAR</button>
 </a>
-<button class="moreEdit"><i class="fa-solid fa-chevron-down"></i></button>
+<button class="more moreEdit" onclick="openMoreOptions('moreOptions')">
+    <i class="fa-solid fa-chevron-down"></i>
+    <ul class="moreOptions hidden" id="moreOptions">
+        <a href="{{URL}}/settings/profile">
+            <li><i class="fa-solid fa-user-pen"></i> Edit</li>
+        </a>
+        <hr>
+        <a onclick="shareToClipboard()" id="profile-share-button" data-clipboard-target="#profile-share-link">
+            <li><i class="fa-solid fa-share-nodes"></i> Share</li>
+        </a>
+        <hr>
+        <a href="{{URL}}/logout">
+            <li><i class="fa-solid fa-arrow-right-from-bracket"></i> Quit</li>
+        </a>
+    </ul>
+</button>

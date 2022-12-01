@@ -20,12 +20,12 @@ class Organization{
      * Site da organização
      * @var string
      */
-    public $site = 'https://riftmaker.com';
+    public $site = 'https://localhost/tcc/';
 
     /**
      * Descrição da organização
      * @var string
      */
-    public $description = 'Lorem ipsum dolor sit amet...';
+    public $description = 'Impusic é uma plataforma digital de apoio ao crescimento de artistas e produtores de suas obras.';
 
 }

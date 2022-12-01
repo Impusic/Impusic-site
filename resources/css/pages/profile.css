@@ -1,35 +1,22 @@
 :root{
-    --description: rgb(207, 207, 207);
-    --description-hover: rgb(158, 158, 158);
 
-    --link: #0041a3;
-    --link-hover: #00388b;
-
-    --profile-button: #6977F4;
-    --profile-button-hover: #3a4dff;
-
-    --profile-button-edit: #76777d;
-    --profile-button-edit-hover: #515255;
+    --profile-more-options-background: rgba(52, 52, 52, 0.3);
+    --video-aspect-ratio: 15;
 }
 .hero{
     width: 100%;
     height: 35vh;
 
-    background-color: rgba(128, 128, 128, 0.4);
     position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 .hero > .social{
     display: flex;
     position: absolute;
     right: 10px;
     bottom: 10px;
-}
-.hero > .social > a{
-    color: var(--text);
-    transition: .3s;
-}
-.hero > .social > a:hover{
-    color: var(--text-hover);
 }
 .hero > .social > a + a{
     margin-left: 10px;
@@ -54,27 +41,29 @@
     border-radius: 100%;
 }
 .profileInfo > h1{
-    color: var(--text);
+    color: var(--label);
     font-weight: 900;
     font-size: 25px;
 
     margin-top: 10px;
 }
 .profileInfo > p{
-    color: var(--desc-bt);
+    color: var(--description);
     font-weight: 300;
     font-size: 15px;
-    width: 75%;
+    width: 230px;
     text-align: center;
     margin: 5px 0;
 }
 .profileInfo > p > a{
     color: var(--link);
+    font-weight: 400;
     text-decoration: none;
     transition: .3s;
+    cursor: pointer;
 }
 .profileInfo > p > a:hover{
-    color: var(--link-hover);
+    color: var(--secondary-link);
 }
 .profileInfo > .settings{
     display: flex;
@@ -92,12 +81,54 @@
     border-radius: 5px;
     cursor: pointer;
 
-    background-color: var(--profile-button);
+    background-color: var(--blue);
     color: white;
     font-weight: 900;
     transition: .3s;
+    position: relative;
 }
-.profileInfo > .settings > .follow{
+.profileInfo > .settings > .moreFollow{
+    background-color: var(--blue);
+}
+.profileInfo > .settings > .more > .moreOptions{
+    position: absolute;
+    top: 30px;
+
+    width: 100px;
+    left: calc(50% - calc(100px/2));
+
+    list-style-type: none;
+
+    background: rgba( 183, 183, 183, 0.15 );
+    box-shadow: 0 8px 32px 0 rgba(254, 254, 254, 0.05);
+    backdrop-filter: blur( 10px );
+    -webkit-backdrop-filter: blur( 10px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border-radius: 5px;
+}
+.profileInfo > .settings > .more > .moreOptions li{
+    padding: 8px 0;
+}
+.profileInfo > .settings > .more > .moreOptions hr{
+    width: 75%;
+    margin: 0 auto;
+    height: 1px;
+    background-color: var(--gray-3);
+}
+.profileInfo > .settings > .more > .moreOptions a{
+    color: var(--label);
+    text-decoration: none;
+    font-size: 12px;
+    transition: .2s;
+}
+.profileInfo > .settings > .more > .moreOptions a:hover{
+    color: var(--description);
+}
+.profileInfo > .settings > .more > .moreOptions a:active{
+    color: var(--red);
+}
+.profileInfo > .settings > a > .follow{
     padding: 0 10px;
     height: 25px;
 
@@ -106,18 +137,21 @@
     border-radius: 5px;
     cursor: pointer;
 
-    background-color: var(--profile-button);
+    background-color: var(--blue);
     color: white;
     font-weight: 900;
     transition: .3s;
 }
-.profileInfo > .settings > .follow:hover,
-.profileInfo > .settings > .more:hover{
-    background-color: var(--profile-button-hover);
+.profileInfo > .settings > a > .follow:hover,
+.profileInfo > .settings > .moreFollow:hover{
+    background-color: var(--secondary-blue);
 }
 
-.profileInfo > .settings > .moreEdit{
-    width: 25px;
+.profileInfo > .settings > .moreFollowing{
+    background-color: var(--green);
+}
+.profileInfo > .settings > a > .following{
+    padding: 0 10px;
     height: 25px;
 
     outline: none;
@@ -125,10 +159,18 @@
     border-radius: 5px;
     cursor: pointer;
 
-    background-color: var(--profile-button-edit);
+    background-color: var(--green);
     color: white;
     font-weight: 900;
     transition: .3s;
+}
+.profileInfo > .settings > a > .following:hover,
+.profileInfo > .settings > .moreFollowing:hover{
+    background-color: var(--secondary-green);
+}
+
+.profileInfo > .settings > .moreEdit{
+    background-color: var(--gray-2);
 }
 .profileInfo > .settings > a > .edit{
     padding: 0 10px;
@@ -139,18 +181,18 @@
     border-radius: 5px;
     cursor: pointer;
 
-    background-color: var(--profile-button-edit);
+    background-color: var(--gray-2);
     color: white;
     font-weight: 900;
     transition: .3s;
 }
 .profileInfo > .settings > a > .edit:hover,
 .profileInfo > .settings > .moreEdit:hover{
-    background-color: var(--profile-button-edit-hover);
+    background-color: var(--gray-3);
 }
 
 .stats{
-    color: rgba(161, 161, 161, 0.9);
+    color: var(--gray-1);
 
     text-align: center;
 }
@@ -167,7 +209,7 @@
 .hr{
     width: 75vw;
     height: 1px;
-    background-color: rgba(128, 128, 128, 0.6);
+    background-color: var(--gray-2);
     margin: 10px auto;
 }
 .spaceProfile{
@@ -186,56 +228,133 @@
     padding: 30px 0;
 }
 .profileVideos > .videoContainer{
-    width: 30%;
+    width: auto;
     height: auto;
 }
-.profileVideos > .videoContainer > a > img{
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 100%;
+.profileVideos > .videoContainer a > img{
+    width: calc(3840px / var(--video-aspect-ratio));
+    height: calc(2160px / var(--video-aspect-ratio));
     cursor: pointer;
 }
 .profileVideos > .videoContainer > .title{
     all: inherit;
     width: auto;
 }
-.profileVideos > .videoContainer > a > h1{
-    color: var(--text);
+.profileVideos > .videoContainer a{
+    text-decoration: none;
+    height: auto;
+}
+.profileVideos > .videoContainer a > h1{
+    color: var(--label);
     font-size: 16px;
     transition: .3s;
 
     cursor: pointer;
+    max-width: 225px;
 
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     padding: 0 5px;
 }
-.profileVideos > .videoContainer > h1:hover{
-    color: var(--text-hover);
+.profileVideos > .videoContainer a > h1:hover{
+    color: var(--gray-1);
 }
-.profileVideos > .videoContainer > h2{
+.profileVideos > .videoContainer h2{
     padding: 0 5px;
 }
-.profileVideos > .videoContainer > h2,
-.profileVideos > .videoContainer > h2 > a{
-    color: var(--description);
+.profileVideos > .videoContainer h2,
+.profileVideos > .videoContainer h2 > a{
+    color: var(--secondary-label);
     text-decoration: none;
     font-size: 10px;
     font-weight: 300;
+    max-width: 225px;
 
     transition: .3s;
 }
-.profileVideos > .videoContainer > h2 > a:hover{
-    color: var(--description-hover);
+.profileVideos > .videoContainer h2 > a:hover{
+    color: var(--gray-1);
 }
-.profileVideos > .videoContainer > h3{
-    color: var(--description);
+.profileVideos > .videoContainer h3{
+    color: var(--tertiary-label);
     text-decoration: none;
-    font-size: 10px;
-    font-weight: 500;
+    font-size: 8px;
+    font-weight: 300;
+    font-style: italic;
+    max-width: 225px;
 
     padding: 0 5px;
     transition: .3s;
+}
+.videoContainer > .videoDesc{
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+.videoContainer > .videoDesc > .divOptions{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.videoContainer > .videoDesc .videoOptions{
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+
+    color: var(--label);
+    font-weight: 900;
+    transition: .3s;
+    position: relative;
+    padding: 2px 4px;
+}
+.videoContainer > .videoDesc .videoOptions:hover{
+    color: var(--gray-1);
+}
+
+
+.videoContainer > .videoDesc > .divOptions > .videoOptions > .moreOptionsVideo{
+    position: absolute;
+    top: 35px;
+
+    width: 75px;
+    left: calc(50% - calc(75px/2));
+
+    list-style-type: none;
+
+    background: rgba( 183, 183, 183, 0.15 );
+    box-shadow: 0 8px 32px 0 rgba(254, 254, 254, 0.05);
+    backdrop-filter: blur( 10px );
+    -webkit-backdrop-filter: blur( 10px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border-radius: 5px;
+}
+.videoContainer > .videoDesc > .divOptions > .videoOptions > .moreOptionsVideo li{
+    padding: 8px 0;
+}
+.videoContainer > .videoDesc > .divOptions > .videoOptions > .moreOptionsVideo hr{
+    width: 75%;
+    margin: 0 auto;
+    height: 1px;
+    background-color: var(--gray-3);
+}
+.videoContainer > .videoDesc > .divOptions > .videoOptions > .moreOptionsVideo a{
+    color: var(--label);
+    text-decoration: none;
+    font-size: 8px;
+    transition: .2s;
+}
+.videoContainer > .videoDesc > .divOptions > .videoOptions > .moreOptionsVideo a:hover{
+    color: var(--description);
+}
+.videoContainer > .videoDesc > .divOptions > .videoOptions > .moreOptionsVideo a:active{
+    color: var(--red);
+}
+#profile-share-link,
+.video-share-link{
+    position: absolute;
+    top: -1000px;
+    right: 1000px;
+    opacity: 0;
 }

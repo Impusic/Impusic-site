@@ -1,7 +1,7 @@
-<a href="{{URL}}/follow/{{user}}">
-    <button class="follow">SEGUIR</button>
+<a href="{{URL}}/unfollow/{{user}}">
+    <button class="following">SEGUINDO <i class="fa-solid fa-check"></i></button>
 </a>
-<button class="more moreFollow" onclick="openMoreOptions('moreOptions')">
+<button class="more moreFollowing" onclick="openMoreOptions('moreOptions')">
     <i class="fa-solid fa-chevron-down"></i>
     <ul class="moreOptions hidden" id="moreOptions">
         <a onclick="shareToClipboard()" id="profile-share-button" data-clipboard-target="#profile-share-link">

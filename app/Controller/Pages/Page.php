@@ -5,6 +5,7 @@ namespace App\Controller\Pages;
 use \App\Utils\View;
 use \App\Controller\Pages;
 use \App\Session\Admin\Login as SessionAdminLogin;
+use \App\Model\Entity\Channel as EntityChannel;
 
 class Page{
 
@@ -70,13 +71,23 @@ class Page{
     public static function getSignButtons(){
         $itens = '';
 
+        $login = SessionAdminLogin::getLogin();
+
+        if($login !== null){
+            $obUser = EntityChannel::getChannelByUser($login['user']);
+            $id = $obUser->id;
+        }else{
+            $id = '';
+        }
+
         if(!SessionAdminLogin::isLogged()){
             $itens = View::render('pages/home/signButtons', [
             ]);
         }else{
             $login = SessionAdminLogin::getLogin();
             $itens = View::render('pages/home/profileButton', [
-                'user' => $login['user']
+                'user' => $login['user'],
+                'id' => $id
             ]);
         }
 
@@ -116,6 +127,24 @@ class Page{
                     break;
                 case 'emailused':
                     $status = 'Email já sendo utilizado!';
+                    break;
+                case 'loginneeded':
+                    $status = 'Por favor, faça o login!';
+                    break;
+                case 'usernotfound':
+                    $status = 'Usuário não encontrado!';
+                    break;
+                case 'videonotfound':
+                    $status = 'Vídeo não encontrado!';
+                    break;
+                case 'validationerror':
+                    $status = 'Erro de validação!';
+                    break;
+                case 'deleted':
+                    $status = 'Deletado com sucesso!';
+                    break;
+                case 'edited':
+                    $status = 'Editado com sucesso!';
                     break;
             }
         }

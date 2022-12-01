@@ -58,6 +58,12 @@ $obRouter->post('/logout',[
         return new Response(200,Pages\Channel::setLogout($request));
     }
 ]);
+//ROTA DE LOGOUT DE UM USUARIO (GET)
+$obRouter->get('/logout',[
+    function($request){
+        return new Response(200,Pages\Channel::setLogout($request));
+    }
+]);
 
 //ROTA HOME
 $obRouter->get('/profile/{user}',[
@@ -77,6 +83,54 @@ $obRouter->get('/settings/profile',[
 $obRouter->post('/settings/profile',[
     function($request){
         return new Response(200,Pages\Profile::setSettings($request));
+    }
+]);
+
+//ROTA DE ATUALIZAÇÃO DE UM NOVO USUARIO
+$obRouter->get('/follow/{user}',[
+    function($user,$request){
+        return new Response(200,Pages\Profile::setFollow($user,$request));
+    }
+]);
+
+//ROTA DE ATUALIZAÇÃO DE UM NOVO USUARIO
+$obRouter->get('/unfollow/{user}',[
+    function($user,$request){
+        return new Response(200,Pages\Profile::setUnfollow($user,$request));
+    }
+]);
+
+//ROTA DE ADICIONAR UM COMENTÁRIO EM UM VÍDEO
+$obRouter->post('/comment',[
+    function($request){
+        return new Response(200,Pages\Watch::setComment($request));
+    }
+]);
+
+//ROTA DE DELETAR UM COMENTÁRIO EM UM VÍDEO
+$obRouter->get('/comment/delete/{videoId}/{commentId}',[
+    function($videoId,$commentId,$request){
+        return new Response(200,Pages\Watch::setDeleteComment($videoId,$commentId,$request));
+    }
+]);
+//ROTA DE EDITAR UM COMENTÁRIO EM UM VÍDEO
+$obRouter->post('/comment/edit/{videoId}/{commentId}',[
+    function($videoId,$commentId,$request){
+        return new Response(200,Pages\Watch::setEditComment($videoId,$commentId,$request));
+    }
+]);
+
+//ROTA DE DELETAR UM COMENTÁRIO EM UM VÍDEO
+$obRouter->get('/video/delete/{videoId}',[
+    function($videoId,$request){
+        return new Response(200,Pages\Watch::setDeleteVideo($videoId,$request));
+    }
+]);
+
+//ROTA DE BIBLIOTECA DO USUÁRIO
+$obRouter->get('/library',[
+    function($request){
+        return new Response(200,Pages\Library::getLibrary($request));
     }
 ]);
 

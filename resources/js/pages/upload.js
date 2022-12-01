@@ -1,6 +1,3 @@
-'use strict';
-const player = new Plyr('#player');
-
 function openInputThumbnail(){
     $("#selectThumbnailInput").click();
 }
@@ -13,7 +10,6 @@ $('#videoTitle').keypress(function(e){
     e.stopPropagation();
 });
 
-
 function setPreviewThumbnail(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -23,6 +19,7 @@ function setPreviewThumbnail(input) {
         }
 
         reader.readAsDataURL(input.files[0]);
+        $('.showThumbnail').css('display', 'block');
     }
 }
 
@@ -33,10 +30,11 @@ $("#selectThumbnailInput").change(function(){
 $(document).on("change", "#selectVideoInput", function(evt) {
     var $source = $('#videoPreview');
     $source[0].src = URL.createObjectURL(this.files[0]);
+
     $source.parent()[0].load();
+    $('.showThumbnail').css('display', 'block');
+    $('.playerWarning').css('display', 'block');
 });
-
-
 
 // PROCURA A MÚSICA NA API DO DEEZER VIA RAPIDAPI E RETORNA OS RESULTADOS
 function search(){
@@ -55,7 +53,6 @@ function search(){
     
     $.ajax(settings).done(function (response) {
         $('#musics').empty();
-        console.log(response);
 
         let maxCount = 0;
         if(response.total > 6){
@@ -70,7 +67,25 @@ function search(){
         }
         for(let count = 0; count < maxCount; count++){
             var musicDiv = document.createElement("div");
+            musicDiv.setAttribute("id", "music"+count);
             document.getElementById("musics").appendChild(musicDiv);
+
+            // Adiciona o select box da música
+            var musicSelectBox = document.createElement("input");
+            musicSelectBox.type = "radio";
+            musicSelectBox.name = "musicId";
+            musicSelectBox.classList.add('musicSelectBox');
+            musicSelectBox.setAttribute('value', response.data[count].id);
+            musicDiv.appendChild(musicSelectBox);
+
+            $("#music"+count).click(function (e) {    
+                if (!$(e.target).is('input:radio')) {
+                    var $checkbox = $(this).find('input:radio');
+                    $checkbox.prop('checked', !$checkbox.prop('checked'));
+                    $('.musicSelected').removeClass('musicSelected');
+                    $checkbox.prop('checked', $('#music'+count).addClass("musicSelected"));
+                }
+            });
 
             // Adiciona a DIV 'musicThumbnail'
             var musicThumbnail = document.createElement("div");
@@ -88,23 +103,26 @@ function search(){
             musicInfo.classList.add('musicInfo');
 
             // Adiciona o título da música na DIV 'musicInfo'
-            var musicTitle = document.createElement("h1");
+            var musicTitle = document.createElement("p");
             musicInfo.appendChild(musicTitle);
+            musicTitle.classList.add('musicTitle');
             musicTitle.textContent = response.data[count].title;
 
             // Adiciona o artista da música na DIV 'musicInfo'
-            var musicArtist = document.createElement("h2");
+            var musicArtist = document.createElement("p");
             musicInfo.appendChild(musicArtist);
+            musicArtist.classList.add('musicArtist');
             musicArtist.textContent = response.data[count].artist.name;
 
             // Adiciona o código para o link da música
-            var musicLinkText = document.createElement("h3");
+            var musicLinkText = document.createElement("p");
             musicInfo.appendChild(musicLinkText);
+            musicLinkText.classList.add('musicLink');
 
             //Adiciona a logo do deezer na texto do link
             var musicLogo = document.createElement("img");
             musicLogo.classList.add('deezerLogo');
-            musicLogo.src = './resources/svg/deezerSet.svg';
+            musicLogo.src = '../tcc/resources/svg/deezerSet.svg';
             musicLogo.alt = 'Deezer';
             musicLogo.title = 'Deezer';
             musicLinkText.appendChild(musicLogo);
@@ -135,5 +153,17 @@ function delayEvent( fn, delay ) {
         timer = setTimeout(function() {
         return fn.call(self, e);
         }, delay || 200);
+    }
+}
+
+function verifyUploadInputs(){
+    var video = $('#selectVideoInput').val();
+    var title = $('#videoTitle').val();
+    var thumbnail = $('#selectThumbnailInput').val();
+
+    if(isNaN(video) === true && isNaN(title) === true && isNaN(thumbnail)){
+        $('#publishButtonUpload').removeClass('publishButtonDisabledUpload');
+    }else{
+        $('#publishButtonUpload').addClass('publishButtonDisabledUpload');
     }
 }

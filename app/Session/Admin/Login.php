@@ -38,7 +38,7 @@ class Login{
     public static function getLogin(){
         self::init();
 
-        return $_SESSION['user'];
+        return isset($_SESSION['user']) ? $_SESSION['user'] : null;
     }
 
     /**

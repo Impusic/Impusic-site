@@ -29,7 +29,7 @@ class Channel extends Page{
 
         //VERIFICA EMAIL
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $request->getRouter()->redirect('/?status=emailfailed');
+            $request->getRouter()->redirect('/?status=emailfailed&form=register');
             exit;
         }
         
@@ -38,7 +38,7 @@ class Channel extends Page{
         $obChannelUser = EntityChannel::getChannelByUser($user);
         if($obChannelEmail instanceof EntityChannel || $obChannelUser instanceof EntityChannel){
             //REDIRECIONA O USUÁRIO SE JÁ EXISTIR UM EMAIL OU USER
-            $request->getRouter()->redirect('/?status=emailused');
+            $request->getRouter()->redirect('/?status=emailused&form=register');
             exit;
         }
 
@@ -72,13 +72,13 @@ class Channel extends Page{
 
         if(!$obChannelEmail instanceof EntityChannel){
             // EMAIL OU SENHA INVÁLIDOS
-            $request->getRouter()->redirect('/?status=loginfailed');
+            $request->getRouter()->redirect('/?status=loginfailed&form=login');
         }
 
         //VERIFICA A SENHA DO USUÁRIO
         if(!password_verify($senha,$obChannelEmail->password)){
             // EMAIL OU SENHA INVÁLIDOS
-            $request->getRouter()->redirect('/?status=loginfailed');
+            $request->getRouter()->redirect('/?status=loginfailed&form=login');
         }
 
         //CRIA A SESSÃO DE LOGIN

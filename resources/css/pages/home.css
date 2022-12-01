@@ -1,5 +1,6 @@
 :root{
     --video-card-image-height: 160px;
+    --video-aspect-ratio: 15;
 }
 body{
     scroll-behavior: smooth;
@@ -13,7 +14,7 @@ body{
     background-position: center;
     background-repeat: no-repeat;
 
-    color: var(--text);
+    color: var(--label);
     font-weight: 900;
 
     display: grid;
@@ -22,7 +23,10 @@ body{
 
     position: relative;
 }
-.hero > a{
+.hero p{
+    color: var(--quaternary-label);
+}
+.hero a{
     position: absolute;
     text-align: center;
 
@@ -30,14 +34,14 @@ body{
     font-weight: 100;
 
     text-decoration: none;
-    color: var(--text);
+    color: var(--label);
 
     bottom: 10px;
     cursor: pointer;
     transition: .3s;
 }
-.hero > a:hover{
-    color: var(--text-hover);
+.hero a:hover{
+    color: var(--gray-1);
 }
 .hero > div{
     width: 80%;
@@ -51,7 +55,7 @@ body{
     animation: digitando 2s steps(25), blink 1s infinite alternate;
     white-space: nowrap;
     overflow: hidden;
-    border-right: 2px solid rgba(144, 42, 253, 0.2);
+    border-right: 2px solid var(--purple);
 }
 
 .hero > div > p{
@@ -67,7 +71,7 @@ body{
 
 @keyframes blink {
     40%{
-        border-color: rgba(144, 42, 253, 0.5);
+        border-color: var(--secondary-purple);
     }
 }
 
@@ -87,15 +91,28 @@ body{
 
     margin: 15px 0;
 
-    color: var(--text);
+    color: var(--label);
 }
 
 .banner > div{
     width: 50%;
     margin: 25px 0;
 }
+.banner > div > h1{
+    color: var(--label);
+    font-size: 24px;
+}
 .banner > div > p{
     font-weight: 100;
+    font-size: 14px;
+    color: var(--quaternary-label);
+}
+.banner > div a{
+    color: var(--link);
+    transition: .3s;
+}
+.banner > div a:hover{
+    color: var(--secondary-link);
 }
 
 .videoBox{
@@ -105,7 +122,7 @@ body{
     justify-content: center;
 }
 .videoBoxTitle{
-    color: white;
+    color: var(--quaternary-label);
     display: block;
     font-size: 20px;
     
@@ -113,62 +130,67 @@ body{
     margin: 20px auto;
 }
 .videoCard{
+    width: auto;
     display: block;
-    width: 25%;
-    padding: 20px 0;
+    padding: 8px 10px;
 }
 .videoCard > div:last-child{
-    padding: 0 20px;
+    padding: 0 10px;
 }
 .videoCard > div > h1,
 .videoCard > div > h1 > a{
-    color: var(--title-bt);
-    font-size: 17px;
-    font-weight: 500;
-    text-decoration: none;
-
-    /* SET ELLIPSES */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    margin-top: 7px;
-
+    color: var(--label);
+    font-size: 16px;
     transition: .3s;
+    text-decoration: none;
+    max-width: 225px;
+
+    cursor: pointer;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .videoCard > div > h1:hover,
 .videoCard > div > h1 > a:hover{
-    color: var(--title-bt-hover);
+    color: var(--gray-1);
 }
 .videoCard > div > p > a{
+    color: var(--secondary-label);
     all: inherit;
     cursor: pointer;
     transition: .3s;
-}
-.videoCard > div > p > a:hover{
-    text-decoration: underline;
+    max-width: 225px;
 }
 .videoCard > div > p{
-    color: var(--desc-bt);
-    font-size: 13px;
-    font-weight: 400;
-    margin-top: 1.5px;
+    color: var(--secondary-label);
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 300;
+    max-width: 225px;
 
-    max-width: 80%;
-    
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    transition: .3s;
+}
+.videoCard > div > p > a:hover,
+.videoCard > div > p:hover{
+    color: var(--gray-1);
+}
+.videoCard > div > .videoDesc{
+    color: var(--tertiary-label);
+    text-decoration: none;
+    font-size: 8px;
+    font-weight: 300;
+    font-style: italic;
+
+    transition: .3s;
 }
 .videoCard > div > a > div,
 .videoCard > div > a > img{
     background-position: center;
     background-size: cover;
 
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 100%;
+    width: calc(3840px / var(--video-aspect-ratio));
+    height: calc(2160px / var(--video-aspect-ratio));
 }
 .fa-circle{
     color: var(--desc);

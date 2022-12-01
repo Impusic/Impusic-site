@@ -1,4 +1,4 @@
-<div class="hero">
+<div class="hero" style="background-image: linear-gradient(rgba(14, 14, 14, 0.879), rgba(196, 196, 196, 0.2)),url('{{URL}}/resources/banners/profile_{{id}}.png'), url('{{URL}}/resources/banners/banner_default.jpg');">
     <div class="social">
         <a href="{{spotify_link}}" title="Spotify" target="_blank">
             {{spotify_svg}}
@@ -22,21 +22,24 @@
     </div>
 </div>
 <div class="profileInfo">
-    <img src="{{URL}}/resources/images/logos/logo-impusic-bg.png" alt="User Logo">
+    <img src="{{URL}}/resources/icons/profile_{{id}}.png" onerror="this.src='{{URL}}/resources/icons/profile_default.png';" alt="User Logo">
     <h1>{{name}}</h1>
-    <p>{{description}} <a href="">{{seeMore}}</a></p>
+    <p class="hidden" id="allAccountDescription">{{allAccountDescription}}</p>
+    <p class="hidden" id="minAccountDescription">{{accountDescription}}</p>
+    <p id="accountDescription"><span>{{accountDescription}}</span> <a id="seeMoreDescription" class="activeMoreDescription" onclick="showAllAccountDescription()">{{seeMore}}</a></p>
     
     <div class="settings">
-        {{follow}}
+        {{paperButton}}
     </div>
 </div>
+<input type="text" id="profile-share-link">
 
 <div class="spaceProfile"></div>
 
 <div class="stats">
     <p><span>{{videosCount}}</span> publicações</p>
-    <p><span>{{follows}}</span> seguidores</p>
-    <p><span>{{following}}</span> seguindo</p>
+    <p><span>{{follows}}</span> seguindo</p>
+    <p><span>{{following}}</span> seguidores</p>
 </div>
 <div class="hr"></div>
 

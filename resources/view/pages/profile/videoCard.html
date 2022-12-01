@@ -1,12 +1,27 @@
 <div class="videoContainer">
-    <a href="{{URL}}/watch/{{link}}">
-        <img src="{{URL}}/resources/thumbnail/{{thumbnail}}.png" alt="{{videoTitle}}">
-    </a>
-    <a href="{{URL}}/watch/{{link}}" class="title">
-        <h1>{{videoTitle}}</h1>
-    </a>
-    <h2>
-        <a href="{{URL}}/profile/{{channelUser}}">{{channel}}</a>
-    </h2>
-    <h3>2.000 visualizações - {{time}}</h3>
+    <div>
+        <a href="{{URL}}/watch/{{link}}">
+            <img src="{{URL}}/resources/thumbnail/{{thumbnail}}.png" alt="{{videoTitle}}">
+        </a>
+    </div>
+    <div class="videoDesc">
+        <div>
+            <a href="{{URL}}/watch/{{link}}" class="title">
+                <h1>{{videoTitle}}</h1>
+            </a>
+            <h2>
+                <a href="{{URL}}/profile/{{channelUser}}">{{channel}}</a>
+            </h2>
+            <h3>2.000 visualizações - {{time}}</h3>
+        </div>
+        <div class="divOptions">
+            <button class="videoOptions" onclick="openMoreOptions('moreOptionsVideo')">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+                <ul class="moreOptionsVideo hidden" id="moreOptionsVideo">
+                    {{optionsVideo}}
+                </ul>
+            </button>
+        </div>
+    </div>    
+    <input type="text" class="video-share-link" id="video-share-link-{{idNumber}}" value="{{URL}}/watch/{{link}}">
 </div>

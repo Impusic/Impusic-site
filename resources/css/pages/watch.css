@@ -4,20 +4,35 @@
 
     --video-title-color: rgb(221, 221, 221);
     --video-description-color: rgb(199, 199, 199);
+    --video-description-title-color: rgb(148, 148, 148);
+
+    --video-channel-name: rgb(182, 182, 182);
+    --video-channel-name-hover: rgb(198, 198, 198);
+
     --comment-title-color: rgb(231, 231, 231);
+    --comment-title-color-hover: rgb(173, 173, 173);
     --comment-description-color: rgb(211, 211, 211);
+
+    --comment-button-options-color: rgba( 255, 255, 255, 0.18 );
+    --comment-button-options-color-hover: rgb(199, 199, 199);
+
+    --comment-more-option-hr-color: rgba( 255, 255, 255, 0.18 );
+    --comment-more-option-link-color: rgba(182, 182, 182, 0.819);
+    --comment-more-option-link-color-hover: rgba(236, 236, 236, 0.819);
+    --comment-more-option-link-color-clicked: rgba(137, 255, 121, 0.819);
+
+    --video-aspect-ratio: 2.5;
 }
 
-#player{
-    width: calc(1920px / 3);
-    height: calc(1080px / 3);
+.container{
+    justify-content: center;
 }
-
 .videoContainer{
     margin: 100px auto;
     width: 80vw;
+    max-width: 80vw;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
 }
 
 
@@ -25,68 +40,101 @@
 .videoContainer > .videoPlayer{
     justify-content: center;
 
-    color: var(--text);
+    color: var(--label);
 }
 
 .videoContainer > .videoPlayer > .header{
     width: 90%;
     margin: 0 auto;
+    padding: 10px 50px;
 }
-.videoContainer > .videoPlayer > div > h1{
+.videoContainer > .videoPlayer > div > .videoTitle > h1{
     font-size: 20px;
     padding: 5px 0;
 
     max-width: 100%;
     word-break: break-all;
 
-    color: var(--video-title-color);
+    color: var(--label);
+    margin-top: 5px;
 }
 .videoContainer > .videoPlayer > div > h2{
     font-size: 14px;
     font-weight: 300;
+    padding: 2px 15px;
+
+    max-width: 100%;
+    word-break: break-all;
+
+    color: var(--quartenary-label);
+}
+.videoContainer > .videoPlayer > div > .titleDescription{
+    font-size: 16px;
+    font-weight: 900;
     padding: 2px 0;
 
     max-width: 100%;
     word-break: break-all;
 
-    color: var(--video-description-color);
+    color: var(--label);
+    margin-top: 15px;
 }
-
-.videoContainer > .videoPlayer > div > span{
+.videoContainer > .videoPlayer > div > .videoTitle{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+.videoContainer > .videoPlayer > div > .videoTitle > span{
     user-select: none;
 }
-.videoContainer > .videoPlayer > div > span > p{
+.videoContainer > .videoPlayer > div > .videoTitle > span > p{
     display: inline;
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;
 
     transition: .3s;
 }
-.videoContainer > .videoPlayer > div > span > p + p{
+.videoContainer > .videoPlayer > div > .videoTitle > span > p + p{
     margin-left: 10px;
 }
 
-.videoContainer > .videoPlayer > div > span > p:hover{
-    color: var(--text-hover);
+.videoContainer > .videoPlayer > div > .videoTitle > span > p:hover{
+    color: var(--gray-1);
+}
+.videoContainer > .videoPlayer > div > .videoChannel{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    align-content: center;
+    margin: 15px 0;
+}
+.videoContainer > .videoPlayer > div > .videoChannel img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: var(--gray-6);
+}
+.videoContainer > .videoPlayer > div > .videoChannel h2,
+.videoContainer > .videoPlayer > div > .videoChannel a{
+    max-height: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-1);
+    text-decoration: none;
+    transition: .3s;
+}
+.videoContainer > .videoPlayer > div > .videoChannel h2:hover,
+.videoContainer > .videoPlayer > div > .videoChannel a:hover{
+    color: var(--quartenary-label);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.videoContainer > div > .comments{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+}
 
 .videoContainer > div > .comments > .headerComments{
     width: 80%;
@@ -95,16 +143,26 @@
 }
 
 .videoContainer > div > .comments > .headerComments > h1{
-    color: var(--text);
+    color: var(--label);
     font-size: 15px;
 }
 .videoContainer > div > .comments > .headerComments > h1 > p{
     display: inline;
 }
 
-.videoContainer > div > .comments > div > .commentInput{
-    width: 70%;
-    margin: 15px auto;
+.videoContainer > div > .comments > div{
+    display: flex;
+}
+.videoContainer > div > .comments > .sendComments{
+    display: flex;
+    justify-content: center;
+}
+.videoContainer > div > .comments > .sendComments > .commentInput{
+    min-width: 10px;
+    width: 80%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
 }
 
 .videoContainer > div > .comments > div > .commentInput > img{
@@ -118,7 +176,7 @@
 
 .videoContainer > div > .comments > div > .commentInput > input{
     border: none;
-    border-bottom: thin solid var(--text-unavaliable);
+    border-bottom: thin solid var(--description);
     padding: 5px 10px;
 
     font-weight: 300;
@@ -130,12 +188,12 @@
 }
 .videoContainer > div > .comments > div > .commentInput > input::placeholder{
     font-weight: 400;
-    color: var(--text-unavaliable);
+    color: var(--description);
 }
 .videoContainer > div > .comments > div > .commentInput > input:focus{
     border: none;
     outline: none;
-    border-bottom: thin solid var(--text);
+    border-bottom: thin solid var(--label);
 }
 .videoContainer > div > .comments > div > .commentInput > button{
     padding: 4px 8px;
@@ -144,37 +202,445 @@
 
     border: none;
     border-radius: 5px;
-    background-color: var(--text-unavaliable);
+    background-color: var(--gray-1);
 
-    color: var(--text);
+    color: var(--label);
     font-weight: 400;
 }
 
 .videoContainer > div > .comments > .commentBox{
-    margin: 10px auto;
-    width: 90%;
-     
-    color: var(--text);
+    margin-top: 10px;
+
+    color: var(--label);
 
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
     gap: 10px;
+
+    padding: 10px 16px;
+    transition: .3s;
+    border: 1px solid transparent;
+    border-radius: 10px;
+}
+.videoContainer > div > .comments > .commentBox > .commentOptions{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+.videoContainer > div > .comments > .commentBox > .commentOptions > .more{
+    width: 30px;
+    height: 30px;
+
+    outline: none;
+    border: none;
+    cursor: pointer;
+
+    background-color: transparent;
+    color: var(--comment-button-options-color);
+
+    font-weight: 900;
+    font-size: 13px;
+
+    transition: .3s;
+    position: relative;
+    opacity: 0%;
+}
+.videoContainer > div > .comments > .commentBox > .commentOptions > .more:hover{
+    color: var(--comment-button-options-color-hover);
+}
+.videoContainer > div > .comments > .commentBox > .commentOptions > .more > .moreOptions{
+    position: absolute;
+    top: 0;
+
+    width: 100px;
+    left: 50px;
+
+    list-style-type: none;
+
+    background: rgba( 183, 183, 183, 0.15 );
+    box-shadow: 0 8px 32px 0 rgba(254, 254, 254, 0.05);
+    backdrop-filter: blur( 30px );
+    -webkit-backdrop-filter: blur( 30px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border-radius: 0 5px 5px 5px;
+
+    transition: .5s;
+}
+.videoContainer > div > .comments > .commentBox > .commentOptions > .more > .moreOptions li{
+    padding: 8px 0;
+}
+.videoContainer > div > .comments > .commentBox > .commentOptions > .more > .moreOptions hr{
+    width: 75%;
+    margin: 0 auto;
+    height: 1px;
+    background-color: var(--comment-more-option-hr-color);
+}
+.videoContainer > div > .comments > .commentBox > .commentOptions > .more > .moreOptions a{
+    color: var(--comment-more-option-link-color);
+    text-decoration: none;
+    transition: .2s;
+}
+.videoContainer > div > .comments > .commentBox > .commentOptions > .more > .moreOptions a:hover{
+    color: var(--comment-more-option-link-color-hover);
+}
+.videoContainer > div > .comments > .commentBox > .commentOptions > .more > .moreOptions a:active{
+    color: var(--comment-more-option-link-color-clicked);
+}
+.videoContainer > div > .comments > .commentBox:hover .commentOptions > .more{
+    opacity: 100%;
+}
+.videoContainer > div > .comments > .commentBox:hover{
+    background: rgba( 176, 176, 176, 0.1 );
+    box-shadow: 0 8px 32px 0 rgba(216, 216, 216, 0.07);
+    backdrop-filter: blur( 15px );
+    -webkit-backdrop-filter: blur( 15px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 .videoContainer > div > .comments > .commentBox > img {
     width: 35px;
     height: 35px;
     border-radius: 100%;
 }
-.videoContainer > div > .comments > .commentBox > div > h1{
+.videoContainer > div > .comments > .commentBox > div > h1,
+.videoContainer > div > .comments > .commentBox > div > h1 > a{
     color: var(--comment-title-color);
     font-size: 18px;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: auto;
+    text-decoration: none;
+
+    transition: .5s;
+}
+.videoContainer > div > .comments > .commentBox > div > h1 > a:hover{
+    color: var(--comment-title-color-hover);
+}
+.videoContainer > div > .comments > .commentBox > div > h1 > a > i{
+    color: var(--comment-title-color-hover);
+    font-size: 10px;
+    margin: 0 5px;
+}
+.videoContainer > div > .comments > .commentBox > div > span,
+.videoContainer > div > .comments > .commentBox > div > form > div > span{
+    color: var(--video-description-title-color);
+    font-size: 12px;
+    font-weight: 100;
+    display: inline;
+    font-style: italic;
 }
 .videoContainer > div > .comments > .commentBox > div > p{
     color: var(--comment-description-color);
     font-size: 12px;
     font-weight: 300;
 }
+.videoContainer > div > .comments > .commentBox > div > form > textarea{
+    resize: vertical;
+    width: 100%;
+    min-height: 50px;
+    max-height: 150px;
+
+    color: var(--comment-description-color);
+    font-size: 12px;
+    font-weight: 300;
+    
+    background-color: rgba(255, 255, 255, 0.05);
+    outline: none;
+    border: thin solid gray;
+    padding: 4px 4px;
+    border-radius: 5px;
+}
+.videoContainer > div > .comments > .commentBox > div > form > div{
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 5px;
+}
+.videoContainer > div > .comments > .commentBox > div > form > div > button{
+    padding: 4px 16px;
+    border: thin solid rgba(128, 128, 128, 0.5);
+    color: var(--comment-description-color);
+    font-weight: 900;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+.videoContainer > div > .comments > .commentBox > div > form > div > .buttonEditConfirm{
+    background-color: rgba(85, 255, 28, 0.15);
+    border: thin solid rgba(128, 128, 128, 0.1);
+    transition: .3s;
+}
+.videoContainer > div > .comments > .commentBox > div > form > div > .buttonEditConfirm:hover{
+    background-color: rgba(85, 255, 28, 0.20);
+}
 .videoContainer > div > .comments > .commentBox + .commentBox{
     margin-top: 30px;
+}
+
+#player{
+    width: calc(3840px / var(--video-aspect-ratio));
+    height: calc(2160px / var(--video-aspect-ratio));
+}
+.vjs-custom-theme .vjs-control-bar {
+    background: transparent !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.75) 100%) !important;
+}
+.vjs-custom-theme .vjs-big-play-button {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 100% !important;
+    left: calc(50% - calc(50px / 2)) !important;
+    top: calc(50% - calc(50px / 2)) !important;
+}
+.vjs-custom-theme .vjs-volume-control {
+    align-items: center !important;
+}
+.vjs-custom-theme .vjs-play-progress:before {
+    top: -4px !important;
+}
+.vjs-custom-theme .vjs-fullscreen-control .vjs-icon-placeholder:before {
+    line-height: 30px;
+}
+.vjs-custom-theme button:hover {
+    color: rgb(238, 238, 238);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.vjs-custom-theme .vjs-progress-control .vjs-progress-holder {
+    margin: 0 10px;
+    background: rgba(255, 255, 255, 0.25);
+    height: 1px;
+}
+.vjs-custom-theme .vjs-progress-control:hover .vjs-play-progress:before {
+    top: -7px !important;
+}
+.vjs-custom-theme .vjs-control-bar {
+    height: 54px;
+    background: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: visibility 0.1s, opacity 0.1s;
+    -o-transition: visibility 0.1s, opacity 0.1s;
+    transition: visibility 0.1s, opacity 0.1s;
+}
+.vjs-custom-theme .vjs-volume-panel {
+    -webkit-box-ordinal-group: 5;
+    -ms-flex-order: 4;
+    order: 4;
+    display: flex;
+    align-items: center;
+}
+.vjs-custom-theme .vjs-fullscreen-control {
+    -webkit-box-ordinal-group: 5;
+    -ms-flex-order: 5;
+    order: 5;
+}
+.vjs-custom-theme .vjs-picture-in-picture-control, .vjs-custom-theme .vjs-remaining-time {
+    display: none;
+}
+.vjs-custom-theme .vjs-play-control {
+    width: 5em !important;
+}
+
+.musicDeezer{ 
+    display: grid;
+    justify-content: left;
+    display: none;
+}
+.musicDeezer > .music{
+    border: thin solid gray;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-content: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: relative;
+}
+.musicDeezer > .music img{
+    width: 50px;
+    height: 50px;
+}
+.musicDeezer > .music p{
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.musicDeezer > .music #musicTitle{
+    font-size: 17px;
+    font-weight: 700;
+}
+.musicDeezer > .music #musicArtist{
+    font-size: 13px;
+    font-weight: 300;
+}
+.musicDeezer > .music #musicLink,
+.musicDeezer > .music #musicLink > img{
+    width: 20px;
+    height: 20px;
+}
+.musicDeezer > .music #musicLink{
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+.videoContainer > .videoPlayer > .videoDiv{
+    display: flex;
+    justify-content: center;
+}
+@media screen and (max-width: 2000px){
+    :root{
+        --video-aspect-ratio: 3;
+    }
+}
+@media screen and (max-width: 1800px){
+    :root{
+        --video-aspect-ratio: 3.5;
+    }
+}
+@media screen and (max-width: 1700px){
+    :root{
+        --video-aspect-ratio: 4;
+    }
+}
+@media screen and (max-width: 1500px){
+    :root{
+        --video-aspect-ratio: 5;
+    }
+}
+@media screen and (max-width: 1250px){
+    :root{
+        --video-aspect-ratio: 6;
+    }
+    .videoContainer{
+        width: 90vw;
+        max-width: 90vw;
+    }
+    .videoContainer > div > .comments > .commentBox > div > p{
+        font-size: 10px;
+    }
+    .videoContainer > div > .comments > .commentBox > div > h1,
+    .videoContainer > div > .comments > .commentBox > div > h1 > a{
+        font-size: 16px;
+    }
+    .videoContainer > div > .comments > .commentBox > div > span,
+    .videoContainer > div > .comments > .commentBox > div > form > div > span{
+        font-size: 10px;
+    }
+    .videoContainer > div > .comments > .commentBox > img{
+        width: 30px;
+        height: 30px;
+    }
+    .videoContainer > div > .comments > div > .commentInput > button{
+        font-size: 10px;
+    }
+    .videoContainer > div > .comments > div > .commentInput > input{
+        font-size: 10px;
+    }
+    .videoContainer > div > .comments > div > .commentInput > img{
+        width: 30px;
+        height: 30px;
+    }
+    .videoContainer > div > .comments > .commentBox > .commentOptions > .more > .moreOptions{
+        left: calc(50% - calc(100px / 2));
+        top: 35px;
+    }
+}
+@media screen and (max-width: 1000px) {
+    :root{
+        --video-aspect-ratio: 5;
+    }
+    .videoContainer{
+        grid-template-columns: 100%;
+        grid-template-rows: auto 1fr;
+        gap: 100px;
+    }
+}
+@media screen and (max-width: 850px) {
+    :root{
+        --video-aspect-ratio: 6;
+    }
+    .videoContainer > .videoPlayer > div > .videoTitle > h1{
+        font-size: 18px;
+    }
+    .videoContainer > .videoPlayer > div > .videoTitle > span > p{
+        font-size: 12px;
+    }
+    .musicDeezer > .music #musicTitle{
+        font-size: 15px;
+    }
+    .musicDeezer > .music #musicArtist{
+        font-size: 11px;
+    }
+    .musicDeezer > .music #musicLink, .musicDeezer > .music #musicLink > img{
+        width: 16px;
+        height: 16px;
+    }
+    .videoContainer > .videoPlayer > div > .titleDescription{
+        font-size: 14px;
+    }
+    .videoContainer > .videoPlayer > div > h2{
+        font-size: 12px;
+    }
+    .videoContainer > div > .comments > .headerComments > h1{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 720px) {
+    :root{
+        --video-aspect-ratio: 6.5;
+    }
+}
+@media screen and (max-width: 660px) {
+    :root{
+        --video-aspect-ratio: 7;
+    }
+}
+@media screen and (max-width: 610px) {
+    :root{
+        --video-aspect-ratio: 8;
+    }
+}
+@media screen and (max-width: 550px) {
+    #content{
+        padding-top: 50px;
+    }
+    .videoContainer > .videoPlayer > div > .videoTitle > h1{
+        font-size: 16px;
+    }
+    .videoContainer > .videoPlayer > div > .videoChannel h2,
+    .videoContainer > .videoPlayer > div > .videoChannel a{
+        font-size: 12px;
+    }
+    .videoContainer > .videoPlayer > div > .videoChannel img{
+        width: 30px;
+        height: 30px;
+    }
+    .musicDeezer > .music #musicTitle{
+        font-size: 13px;
+    }
+    .musicDeezer > .music #musicArtist{
+        font-size: 9px;
+    }
+    .musicDeezer > .music img{
+        width: 40px;
+        height: 40px;
+    }
+    .videoContainer > .videoPlayer > div > .titleDescription{
+        font-size: 12px;
+    }
+    .videoContainer > .videoPlayer > div > h2{
+        font-size: 10px;
+    }
+    .videoContainer > div > .comments > .headerComments > h1{
+        font-size: 11px;
+    }
 }

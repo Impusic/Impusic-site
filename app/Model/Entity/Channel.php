@@ -91,7 +91,7 @@ class Channel{
     public function cadastrar(){
         //INSERE A INSTANCIA NO BANCO
         $this->id = (new Database('channel'))->insert([
-            'user' => $this->user,
+            'user' => strtolower($this->user),
             'name' => $this->name,
             'description' => $this->description,
             'email' => $this->email,
@@ -115,7 +115,7 @@ class Channel{
      */
     public function atualizar(){
         return (new Database('channel'))->update('id = '.$this->id,[
-            'user' => $this->user,
+            'user' => strtolower($this->user),
             'name' => $this->name,
             'description' => $this->description,
             'email' => $this->email,
@@ -164,7 +164,7 @@ class Channel{
      * @return User
      */
     public static function getChannelByUser($id){
-        return self::getChannels('user = "'.$id.'"')->fetchObject(self::class);
+        return self::getChannels('user = "'.strtolower($id).'"')->fetchObject(self::class);
     }
 
     /**
@@ -177,17 +177,5 @@ class Channel{
      */
     public static function getChannels($where = null, $order = null, $limit = null, $fields = '*'){
         return (new Database('channel'))->select($where,$order,$limit,$fields);
-    }
-
-    /**
-     * Método responsável por retornar Usuarios
-     * @param string $where
-     * @param string $order
-     * @param string $limit
-     * @param string $fields
-     * @return PDOStatement
-     */
-    public static function getFollows($where = null, $order = null, $limit = null, $fields = '*'){
-        return (new Database('follows'))->select($where,$order,$limit,$fields);
     }
 }

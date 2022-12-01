@@ -72,8 +72,9 @@ class Upload extends Page{
         $channel = $obUser->name;
         $channelUser = $obUser->user;
         $channelId = $obUser->id;
-        $thumbnail = $keyName ?? '';
-        $video = $keyName ?? '';
+        $thumbnail = trim($keyName) ?? '';
+        $video = trim($keyName) ?? '';
+        $musicId = $postVars['musicId'] ?? '';
 
         //NOVA INSTANCIA DE USUÁRIO
         $obVideo = new EntityVideos;
@@ -85,6 +86,7 @@ class Upload extends Page{
         $obVideo->thumbnail = $thumbnail;
         $obVideo->video = $video;
         $obVideo->date = $timestamp;
+        $obVideo->musicId = $musicId;
         $obVideo->cadastrar();
 
         //REDIRECIONA O USUÁRIO

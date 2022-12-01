@@ -7,35 +7,35 @@
         <h1>Registrar uma conta:</h1>
         
         <div class="inputBox">
-            <label for="">Nome</label>
-            <input name="name" id="name" required type="text" placeholder="Digite aqui o seu nome" />
+            <label for="nameRegister">Nome</label>
+            <input name="name" id="nameRegister" required type="text" placeholder="Digite aqui o seu nome" onkeyup="verifyRegisterButton()" autocomplete="off" />
         </div>
 
         <br>
 
         <div class="inputBox">
-            <label for="">Nome de usuário (nome único)</label>
-            <input name="user" id="user" required type="text" placeholder="Digite aqui o seu nome de usuário" />
+            <label for="userRegister">Nome de usuário (nome único)</label>
+            <input name="user" id="userRegister" required type="text" placeholder="Digite aqui o seu nome de usuário" onkeyup="verifyRegisterButton()" autocomplete="off" />
         </div>
 
         <br>
 
         <div class="inputBox">
-            <label for="">Email</label>
-            <input name="email" id="email" required type="email" placeholder="Digite aqui seu email" />
+            <label for="emailRegister">Email</label>
+            <input name="email" id="emailRegister" required type="email" placeholder="Digite aqui seu email" onkeyup="verifyRegisterButton()" autocomplete="off" />
         </div>
 
         <br>
 
         <div class="inputBox">
-            <label for="">Senha</label>
-            <input name="password" id="password" required type="password" placeholder="Escreva aqui corretamente sua senha" />
+            <label for="passwordRegister">Senha</label>
+            <input name="password" id="passwordRegister" required type="password" placeholder="Escreva aqui corretamente sua senha" onkeyup="verifyRegisterButton()" autocomplete="off" />
         </div>
 
         <br>
 
-        <div class="publishButton publishButtonDisabled">
-            <button type="submit">Registrar</button>
+        <div class="publishButtonDiv">
+            <button type="submit" id="publishRegisterButton" class="publishButton publishButtonDisabled">Registrar</button>
         </div>
     </form>
 </div>
